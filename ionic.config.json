@@ -1,0 +1,7 @@
+{
+  "name": "tripbalance",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
