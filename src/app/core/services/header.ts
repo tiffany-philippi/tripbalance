@@ -1,0 +1,10 @@
+import { Injectable, signal } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class HeaderService {
+    title = signal<string>('Minhas Viagens');
+
+    setTitle(title: string) {
+        this.title.set(title);
+    }
+}
