@@ -27,31 +27,34 @@ export class TripsService extends BaseService<Trip> {
 			.single();
 	}
 
-	// async getTotalSpent(tripId: string) {
-	// 	const { data } = await this.supabaseService.supabase
-	// 		.from('expenses')
-	// 		.select('amount')
-	// 		.eq('destination_id', tripId)
+	async getTripDetails(tripId: string) {
+		const [trip, categories, expenses] = await Promise.all([
+			this.supabaseService.supabase
+				.from('trip_summary')
+				.select('name, start_date, end_date, total_budget, total_spent')
+				.eq('id', tripId)
+				.single(),
 
-	// 	const total = data?.reduce(
-	// 		(sum, e) => sum + Number(e.amount),
-	// 		0
-	// 	)
+			this.supabaseService.supabase
+				.from('trip_category_summary')
+				.select('category_name, color_key, icon, planned, spent')
+				.eq('trip_id', tripId),
 
-	// 	return total
-	// }
+			this.supabaseService.supabase
+				.from('trip_expenses_list')
+				.select('*')
+				.eq('trip_id', tripId)
+				.order('expense_date', { ascending: false })
+		]);
 
-	// async getTotalBudget(tripId: string) {
-	// 	const { data } = await this.supabaseService.supabase
-	// 		.from('budgets')
-	// 		.select('planned_amount')
-	// 		.eq('trip_id', tripId)
+		if (trip.error) throw trip.error;
+		if (categories.error) throw categories.error;
+		if (expenses.error) throw expenses.error;
 
-	// 	const total = data?.reduce(
-	// 		(sum, b) => sum + Number(b.planned_amount),
-	// 		0
-	// 	)
-
-	// 	return total
-	// }
+		return {
+			trip: trip.data,
+			categories: categories.data,
+			expenses: expenses.data
+		};
+	}
 }

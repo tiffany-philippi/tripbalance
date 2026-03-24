@@ -6,14 +6,14 @@ import { TripsService } from 'src/app/core/services/trips'
 import { Trip } from 'src/app/models/trip'
 
 @Component({
-  selector: 'app-trips',
-  templateUrl: './trips.page.html',
-  styleUrls: ['./trips.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
   imports: [CommonModule, IonicModule],
 })
-export class TripsPage implements OnInit {
+export class HomePage implements OnInit {
 
-  trips: Trip[] = []
+  tripsList: Trip[] = []
 
   constructor(
     private tripsService: TripsService,
@@ -27,16 +27,12 @@ export class TripsPage implements OnInit {
   async loadTrips() {
     const { data, error } = await this.tripsService.getTrips()
     if (data) {
-      this.trips = data
+      this.tripsList = data
     }
   }
 
   openTrip(trip: Trip) {
-    this.router.navigate(['/trips/details', trip.id]);
-  }
-
-  addTrip() {
-    this.router.navigate(['/create-trip'])
+    this.router.navigate(['/trip-details', trip.id]);
   }
 
 }

@@ -4,24 +4,29 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'trips',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
 
   {
-    path: 'trips',
+    path: 'home',
     loadComponent: () =>
-      import('./pages/trips/trips.page').then(m => m.TripsPage)
+      import('./pages/home/home.page').then(m => m.HomePage)
   },
   {
-    path: 'trips/details/:id',
+    path: 'trip-details/:id',
     loadComponent: () =>
-      import('./pages/trips/trip-details/trip-details.page').then(m => m.TripDetailsPage)
+      import('./pages/trip-details/trip-details.page').then(m => m.TripDetailsPage)
   },
   {
     path: 'create-trip',
     loadComponent: () =>
-      import('./pages/trips/create-trip/create-trip.page').then(m => m.CreateTripPage)
+      import('./pages/create-trip/create-trip.page').then(m => m.CreateTripPage)
+  },
+  {
+    path: 'trip-details/:id/create-expense',
+    loadComponent: () =>
+      import('./pages/expenses/create-expense/create-expense.page').then(m => m.CreateExpensePage)
   }
 ];
 

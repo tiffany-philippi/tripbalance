@@ -13,3 +13,87 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+@import "./theme/variables.scss";
+
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.col {
+    flex-grow: 1;
+    flex-basis: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.row-wrap {
+    flex-flow: row wrap;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.shrink-1-basis {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 150px;
+}
+
+// TYPOGRAPHY
+p {
+    margin: 4px;
+}
+.tb-text {
+    font-weight: 400;
+    color: var(--ion-text-color);
+}
+.tb-color-subtitle {
+    color: var(--ion-text-subtitle-color);
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-12 {
+    font-size: 12px;
+}
+
+.text-14 {
+    font-size: 14px;
+}
+
+.text-24 {
+    font-size: 24px;
+}
+
+.tb-container {
+    padding: 16px 24px;
+    background-color: beige;
+    height: 100%;
+}
+
+.tb-card {
+    display: flex;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 8px;
+
+    &.w-shadow {
+        box-shadow: 0 0 14px rgba(204, 204, 204, 0.5);
+    }
+}
