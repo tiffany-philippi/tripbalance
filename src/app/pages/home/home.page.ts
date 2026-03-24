@@ -35,4 +35,8 @@ export class HomePage implements OnInit {
     this.router.navigate(['/trip-details', trip.id]);
   }
 
+  addTrip() {
+    
+  }
+
 }
