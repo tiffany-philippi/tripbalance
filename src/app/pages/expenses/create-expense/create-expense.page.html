@@ -1,0 +1,52 @@
+<div class="tb-container tb-expense-form">
+  <h1>Create Expense</h1>
+  <form [formGroup]="form" (ngSubmit)="createExpense()">
+    <div class="tb-field-container row">
+      <ion-input label="Despesa" formControlName="title" class="tb-custom-field" label-placement="floating" fill="outline"
+        placeholder="Digite o nome da despesa"></ion-input>
+    </div>
+
+    <div class="row align-center gap-16">
+
+      <div class="tb-field-container col">
+        <ion-input formControlName="amount" type="number" label="Valor" class="tb-custom-field" label-placement="floating" fill="outline">
+          <div slot="start">$ </div>
+        </ion-input>
+      </div>
+
+      <div class="tb-field-container col">
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime presentation="date" locale="en-ES" formControlName="expense_date"
+              id="datetime"></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </div>
+    </div>
+    <div class="tb-field-container">
+      <ion-select formControlName="category_id" label="Categoria" class="tb-custom-field" label-placement="floating" fill="outline">
+        <ion-select-option *ngFor="let category of categories"
+          [value]="category.id">{{category.name}}</ion-select-option>
+      </ion-select>
+    </div>
+
+    <div class="row tb-field-container align-center">
+      <div class="col d-flex gap-8">
+        <ion-toggle [checked]="form.value.is_shared" (ionChange)=" changeCounterStatus(form.value.is_shared)" formControlName="is_shared"></ion-toggle>
+        <ion-label>Compartilhar</ion-label>
+      </div>
+      <div class="col">
+        <ion-input [disabled]="!form.value.is_shared" [counter]="true" maxlength="20" formControlName="split_amount" type="number" label="Nº Pessoas" class="tb-custom-field" label-placement="floating"
+          fill="outline"></ion-input>
+      </div>
+
+    </div>
+    <div class="tb-field-container">
+      <ion-textarea formControlName="notes" placeholder="Notes" label="Observações" class="tb-custom-field tb-textarea" label-placement="floating"
+        fill="outline"></ion-textarea>
+    </div>
+    <ion-button class="w-100" type="submit">Create</ion-button>
+  </form>
+</div>
