@@ -19,7 +19,7 @@ export class TripDetailsPage  {
 	trip: any = {};
 	// @TODO: Remove any
 	categories: any[] = [];
-	expenses: Expense[] = [];
+	expenses: any[] = [];
 	loading = true;
 	overviewTitles = ['Planned', 'Spent', 'Budget'];
 
@@ -79,6 +79,10 @@ export class TripDetailsPage  {
 		console.log('entrou')
 	 // this.router.navigate([`trip-details/${this.tripId}/category/${category.id}`])
 	 console.log(category)
+	}
+
+	splitAmount(amount: number, split: number) {
+		return (amount / split).toFixed(2);
 	}
 
 }

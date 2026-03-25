@@ -1,4 +1,6 @@
 .tb-trip-details {
+
+    // @TODO: USE THEME VARIABLES
     .trip-savings {
         color: green;
     }
@@ -11,8 +13,6 @@
         width: calc(50% - 16px);
         margin: 8px;
         gap: 8px;
-
-        // cursor: pointer;
 
         ion-icon {
             font-size: 24px;
@@ -90,6 +90,38 @@
 
             p {
                 margin: 4px;
+            }
+        }
+    }
+
+    .expenses-list {
+        .expense-category-square {
+            width: 12px;
+            height: 12px;
+            border-radius: 4px;
+
+            &.orange {
+                background-color: #FF9F43;
+            }
+
+            &.blue {
+                background-color: #4D8DFF;
+            }
+
+            &.green {
+                background-color: #22C55E;
+            }
+
+            &.red {
+                background-color: #EF4444;
+            }
+
+            &.purple {
+                background-color: #8B5CF6;
+            }
+
+            &.yellow {
+                background-color: #FACC15;
             }
         }
     }

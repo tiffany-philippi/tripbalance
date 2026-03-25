@@ -44,7 +44,7 @@ export class TripsService extends BaseService<Trip> {
 				.from('trip_expenses_list')
 				.select('*')
 				.eq('trip_id', tripId)
-				.order('expense_date', { ascending: false })
+				.order('date', { ascending: false })
 		]);
 
 		if (trip.error) throw trip.error;

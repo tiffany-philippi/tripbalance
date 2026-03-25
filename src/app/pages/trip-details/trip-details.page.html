@@ -5,18 +5,19 @@
 
   <div class="trip-budget-overview tb-card d-flex justify-between align-center">
 
-    <div class="l">
+    <div>
       <p class="tb-color-subtitle">Resumo</p>
       <p class="tb-text text-24">{{ trip.total_spent |
         currency:'BRL' }}</p>
-      
+
       <p class="tb-text" [ngClass]="getSavingsClass(trip.total_budget, trip.total_spent)">
         <ng-container>
           <ion-icon *ngIf="isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-up-outline"></ion-icon>
           <ion-icon *ngIf="!isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-down-outline"></ion-icon>
         </ng-container>
-      {{ trip.total_budget -
-        trip.total_spent | currency:'BRL' }}</p>
+        {{ trip.total_budget -
+        trip.total_spent | currency:'BRL' }}
+      </p>
 
     </div>
   </div>
@@ -47,10 +48,19 @@
   </div>
 
   <h2>Expenses</h2>
-  <ion-list *ngIf="expenses.length > 0; else noExpenses">
-    <ion-item *ngFor="let expense of expenses">
-      <ion-label>{{ expense.title }}</ion-label>
-      <ion-label>{{ expense.amount }}</ion-label>
+  <ion-list class="expenses-list" *ngIf="expenses.length > 0; else noExpenses">
+    <ion-item class="row justify-between" *ngFor="let expense of expenses">
+
+      <span [class]="'expense-category-square' + ' ' + expense.color_key"></span>
+      <div class="expense-title-section col">
+        <p>{{ expense.title }}</p>
+        <p class="tb-color-subtitle text-12">{{ expense.date | date }}</p>
+      </div>
+
+      <div class="expense-price-section col text-align-right">
+        <p class="text-14">{{ expense.amount | currency:'BRL ' }}</p>
+        <p *ngIf="expense.is_shared" class="tb-color-subtitle text-12">{{ splitAmount(expense.amount, expense.split_amount) | currency:'BRL ' }} / each</p>
+      </div>
     </ion-item>
   </ion-list>
 

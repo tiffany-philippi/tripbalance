@@ -32,7 +32,7 @@ export class ExpensesService extends BaseService<Expense> {
 				)
 			`)
 			.eq('trip_id', tripId)
-			.order('expense_date', { ascending: false })
+			.order('date', { ascending: false })
 
 		return { data, error }
 	}
