@@ -27,8 +27,15 @@
 }
 
 .col {
-    flex-grow: 1;
-    flex-basis: auto;
+    flex: 1;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-16 {
+    gap: 16px;
 }
 
 .d-flex {
@@ -53,14 +60,24 @@
     flex-basis: 150px;
 }
 
+.w-100 {
+    width: 100%;
+}
+
+.m-0 {
+    margin: 0;
+}
+
 // TYPOGRAPHY
 p {
     margin: 4px;
 }
+
 .tb-text {
     font-weight: 400;
     color: var(--ion-text-color);
 }
+
 .tb-color-subtitle {
     color: var(--ion-text-subtitle-color);
 }
@@ -81,10 +98,15 @@ p {
     font-size: 24px;
 }
 
+.text-align-right {
+    text-align: right;
+}
+
 .tb-container {
     padding: 16px 24px;
-    background-color: beige;
+    background-color: #F5F7FA;
     height: 100%;
+    overflow: auto;
 }
 
 .tb-card {
@@ -96,4 +118,23 @@ p {
     &.w-shadow {
         box-shadow: 0 0 14px rgba(204, 204, 204, 0.5);
     }
+}
+
+.tb-custom-field {
+    --border-color: var(--ion-border-color) !important;
+    --placeholder-color: var(--ion-text-placeholder-color);
+    --border-radius: 8px !important;
+    --background: #fff;
+    --color: var(--ion-text-color);
+
+    &.tb-textarea {
+        min-height: 100px !important;
+    }
+}
+
+ion-datetime-button::part(native) {
+    background-color: #fff;
+    height: 56px;
+    width: 100%;
+    border: var(--ion-border-color) solid 1px;
 }

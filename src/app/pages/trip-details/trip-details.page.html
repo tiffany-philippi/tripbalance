@@ -1,63 +1,19 @@
 <div class="tb-trip-details tb-container">
-
   <h1>{{ trip.name }}</h1>
+
   <h2>Detalhes da viagem</h2>
+  <ion-spinner *ngIf="loadingID"></ion-spinner>
+  <app-trip-budget-overview *ngIf="!loadingID" [tripId]="tripId"></app-trip-budget-overview>
 
-  <div class="trip-budget-overview tb-card d-flex justify-between align-center">
-
-    <div class="l">
-      <p class="tb-color-subtitle">Resumo</p>
-      <p class="tb-text text-24">{{ trip.total_spent |
-        currency:'BRL' }}</p>
-      
-      <p class="tb-text" [ngClass]="getSavingsClass(trip.total_budget, trip.total_spent)">
-        <ng-container>
-          <ion-icon *ngIf="isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-up-outline"></ion-icon>
-          <ion-icon *ngIf="!isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-down-outline"></ion-icon>
-        </ng-container>
-      {{ trip.total_budget -
-        trip.total_spent | currency:'BRL' }}</p>
-
-    </div>
-  </div>
 
   <h2>Categorias</h2>
-  <div class="d-flex row-wrap">
-    <div class="tb-card w-shadow category-card align-center" *ngFor="let ctg of categories" (click)="openCategory(ctg)">
-
-      <div class="category-icon" [ngClass]="ctg.color_key">
-        <ion-icon [ngClass]="ctg.color_key" [name]="ctg.icon"></ion-icon>
-      </div>
-
-      <div class="category-info">
-        <p class="tb-text">{{ ctg.category_name }}</p>
-
-        <div class="d-flex align-center category-budget-overview" [ngClass]="getSavingsClass(ctg.planned, ctg.spent)">
-
-          <ng-container>
-            <ion-icon *ngIf="isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-up-outline"></ion-icon>
-            <ion-icon *ngIf="!isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-down-outline"></ion-icon>
-          </ng-container>
-
-          <p class="text-12">{{ ctg.spent | currency:'R$ ' }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!--- @TODO: Add "No budgets yet"-->
+  <ion-spinner *ngIf="loadingID"></ion-spinner>
+  <app-budget-category-card *ngIf="!loadingID" [tripId]="tripId"></app-budget-category-card>
 
   <h2>Expenses</h2>
-  <ion-list *ngIf="expenses.length > 0; else noExpenses">
-    <ion-item *ngFor="let expense of expenses">
-      <ion-label>{{ expense.title }}</ion-label>
-      <ion-label>{{ expense.amount }}</ion-label>
-    </ion-item>
-  </ion-list>
-
-  <ng-template #noExpenses>
-    <ion-label>No expenses yet.</ion-label>
-  </ng-template>
-
+  <ion-spinner *ngIf="loadingID"></ion-spinner>
+  <app-expenses-list *ngIf="!loadingID" [tripId]="tripId"></app-expenses-list>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button>

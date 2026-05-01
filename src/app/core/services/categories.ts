@@ -17,10 +17,10 @@ export class CategoriesService {
 	}
 	async getCategories(tripId: string) {
 		const { data, error } = await this.supabaseService.supabase
-			.from('categories')
+			.from('trip_category_summary')
 			.select('*')
 			.eq('trip_id', tripId)
-			.order('name')
+			.order('category_name', { ascending: true })
 
 		return { data, error }
 	}

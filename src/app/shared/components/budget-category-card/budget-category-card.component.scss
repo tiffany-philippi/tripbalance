@@ -1,0 +1,85 @@
+@import 'src/app/shared/styles/trip-details';
+
+.category-card {
+    width: calc(50% - 16px);
+    margin: 8px;
+    gap: 8px;
+
+    ion-icon {
+        font-size: 24px;
+    }
+
+
+    // @TODO: USE CONST:
+    .category-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px;
+
+        &.orange {
+            background: #FFF3E8;
+
+            ion-icon {
+                color: #FF9F43;
+            }
+        }
+
+        &.blue {
+            background: #e6edfa;
+
+            ion-icon {
+                color: #4D8DFF;
+            }
+        }
+
+        &.green {
+            background: #ebfff5;
+
+            ion-icon {
+                color: #22C55E;
+            }
+        }
+
+        &.red {
+            background: #f3d5d5;
+
+            ion-icon {
+                color: #EF4444;
+            }
+        }
+
+        &.purple {
+            background: #ece8ff;
+
+            ion-icon {
+                color: #8B5CF6;
+            }
+        }
+
+        &.yellow {
+            background: #FEFCE8;
+
+            ion-icon {
+                color: #FACC15;
+            }
+        }
+    }
+
+    .category-info {
+
+        .category-budget-overview {
+            ion-icon {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        p {
+            margin: 4px;
+        }
+    }
+}

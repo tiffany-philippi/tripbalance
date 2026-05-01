@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
+import { TripBudgetOverviewComponent } from './shared/components/trip-budget-overview/trip-budget-overview.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule, 
     CommonModule,
     IonicModule,
+    TripBudgetOverviewComponent,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

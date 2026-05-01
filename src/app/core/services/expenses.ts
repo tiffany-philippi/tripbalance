@@ -27,12 +27,11 @@ export class ExpensesService extends BaseService<Expense> {
 			.select(`
 				*,
 				categories (
-					name,
-					icon
+					color_key
 				)
 			`)
 			.eq('trip_id', tripId)
-			.order('expense_date', { ascending: false })
+			// .order('expense_date', { ascending: false })
 
 		return { data, error }
 	}

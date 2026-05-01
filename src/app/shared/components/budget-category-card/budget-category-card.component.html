@@ -1,0 +1,31 @@
+<div class="d-flex row-wrap" *ngIf="categories && categories.length > 0 && !loading; else noCategories">
+  <div class="tb-card w-shadow category-card align-center" *ngFor="let ctg of categories" (click)="openCategory(ctg)">
+
+    <div class="category-icon" [ngClass]="ctg.color_key">
+      <ion-icon [ngClass]="ctg.color_key" [name]="ctg.icon"></ion-icon>
+    </div>
+
+    <div class="category-info">
+      <p class="tb-text">{{ ctg.category_name }}</p>
+
+      <div class="d-flex align-center category-budget-overview" [ngClass]="getSavingsClass(ctg.planned, ctg.spent)">
+
+        <ng-container>
+          <ion-icon *ngIf="isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-up-outline"></ion-icon>
+          <ion-icon *ngIf="!isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-down-outline"></ion-icon>
+        </ng-container>
+
+        <p class="text-12">{{ ctg.spent | currency:'R$ ' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noCategories>
+  <p>No categories yet.</p>
+</ng-template>
+
+<ng-container *ngIf="loading">
+  <ion-spinner></ion-spinner>
+</ng-container>

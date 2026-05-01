@@ -1,0 +1,9 @@
+@import '../../../theme/variables.scss';
+// @TODO: USE THEME VARIABLES
+.trip-savings {
+    color: var(--tb-success);
+}
+
+.trip-overbudget {
+    color: var(--tb-error);
+}
