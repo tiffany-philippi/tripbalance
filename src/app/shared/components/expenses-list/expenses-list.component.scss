@@ -1,0 +1,42 @@
+@import '../../styles/trip-details.scss';
+ 
+.expenses-list {
+    padding: 0;
+
+    &-item {
+        padding: 16px 0;
+        --border-color: transparent;
+        border: 1px solid var(--border-color);
+    }
+
+    .expense-category-square {
+        width: 12px;
+        height: 12px;
+        border-radius: 4px;
+        margin-right: 4px;
+
+        &.orange {
+            background-color: #FF9F43;
+        }
+
+        &.blue {
+            background-color: #4D8DFF;
+        }
+
+        &.green {
+            background-color: #22C55E;
+        }
+
+        &.red {
+            background-color: #EF4444;
+        }
+
+        &.purple {
+            background-color: #8B5CF6;
+        }
+
+        &.yellow {
+            background-color: #FACC15;
+        }
+    }
+}

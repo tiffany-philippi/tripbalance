@@ -1,0 +1,20 @@
+<ion-list class="expenses-list" *ngIf="expenses && expenses.length > 0; else noExpenses">
+  <ion-item class="expenses-list-item row justify-between" *ngFor="let expense of expenses">
+
+    <span [class]="'expense-category-square' + ' ' + expense.categories.color_key"></span>
+    <div class="expense-title-section col">
+      <p>{{ expense.title }}</p>
+      <p class="tb-color-subtitle text-12 m-0">{{ expense.expense_date | date }}</p>
+    </div>
+
+    <div class="expense-price-section col text-align-right">
+      <p class="text-14">{{ expense.amount | currency:'BRL ' }}</p>
+      <p *ngIf="expense.is_shared" class="tb-color-subtitle text-12">{{ splitAmount(expense.amount,
+        expense.split_amount) | currency:'BRL ' }} / each</p>
+    </div>
+  </ion-item>
+</ion-list>
+
+<ng-template #noExpenses>
+  <ion-label>No expenses yet.</ion-label>
+</ng-template>

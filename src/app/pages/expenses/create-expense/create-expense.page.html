@@ -26,9 +26,9 @@
       </div>
     </div>
     <div class="tb-field-container">
-      <ion-select formControlName="category_id" label="Categoria" class="tb-custom-field" label-placement="floating" fill="outline">
+      <ion-select [disabled]="loadingData" formControlName="category_id" label="Categoria" class="tb-custom-field" label-placement="floating" fill="outline">
         <ion-select-option *ngFor="let category of categories"
-          [value]="category.id">{{category.name}}</ion-select-option>
+          [value]="category.id">{{category.category_name}}</ion-select-option>
       </ion-select>
     </div>
 

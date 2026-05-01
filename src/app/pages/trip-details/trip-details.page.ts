@@ -1,17 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ExpensesService } from 'src/app/core/services/expenses';
 import { HeaderService } from 'src/app/core/services/header';
 import { TripsService } from 'src/app/core/services/trips';
-import { Expense } from 'src/app/models/expense';
+import { TripBudgetOverviewComponent } from 'src/app/shared/components/trip-budget-overview/trip-budget-overview.component';
+import { BudgetCategoryCardComponent } from "src/app/shared/components/budget-category-card/budget-category-card.component";
+import { ExpensesListComponent } from 'src/app/shared/components/expenses-list/expenses-list.component';
 
 @Component({
 	selector: 'app-trip-details',
 	templateUrl: './trip-details.page.html',
 	styleUrls: ['./trip-details.page.scss'],
-	imports: [CommonModule, IonicModule],
+	imports: [
+		CommonModule, 
+		IonicModule, 
+		TripBudgetOverviewComponent, 
+		BudgetCategoryCardComponent, 
+		ExpensesListComponent,
+	],
 })
 export class TripDetailsPage  {
 	headerService = inject(HeaderService);
@@ -20,51 +28,27 @@ export class TripDetailsPage  {
 	// @TODO: Remove any
 	categories: any[] = [];
 	expenses: any[] = [];
-	loading = true;
-	overviewTitles = ['Planned', 'Spent', 'Budget'];
+	loadingID = true;
 
 	constructor(
 		private route: ActivatedRoute,
 		private tripsService: TripsService,
-		private expensesService: ExpensesService,
 		private router: Router,
 	) { }
 
-	async ionViewWillEnter() {
+	ionViewWillEnter() {
 		this.route.paramMap.subscribe(params => {
 			this.tripId = params.get('id');
+			this.loadingID = false;
 		});
-
-		await this.loadData(this.tripId!);
 	}
 
-	async loadData(tripId: string) {
-		// @TODO: Load data separately
-		try {
-			this.loading = true;
-
-			const data = await this.tripsService.getTripDetails(tripId);
-			console.log(data);
-
-			this.trip = data.trip;
-			this.categories = data.categories;
-			this.expenses = data.expenses;
-
-		} catch (error) {
-			console.error('Erro ao carregar viagem', error);
-		} finally {
-			this.loading = false;
-		}
+	getSavingsClass(planned: number, spent: number): string {
+		return this.tripsService.getSavingsClass(planned, spent);
 	}
 
-	getSavingsClass(planned: number, spent: number) {
-		if (this.isMoreThanZero(planned - spent)) {
-			return 'trip-savings';
-		} else return 'trip-overbudget';
-	}
-
-	isMoreThanZero(value: number) {
-		return value >= 0;
+	isMoreThanZero(value: number): boolean {
+		return this.tripsService.isMoreThanZero(value);
 	}
 
 	addExpense() {
@@ -75,14 +59,6 @@ export class TripDetailsPage  {
 		//this.router.navigate([`trip-details/${this.tripId}/create-budget`])
 	}
 
-	openCategory(category: any) {
-		console.log('entrou')
-	 // this.router.navigate([`trip-details/${this.tripId}/category/${category.id}`])
-	 console.log(category)
-	}
 
-	splitAmount(amount: number, split: number) {
-		return (amount / split).toFixed(2);
-	}
 
 }

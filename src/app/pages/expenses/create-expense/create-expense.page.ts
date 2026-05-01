@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { ExpensesService } from 'src/app/core/services/expenses';
-import { Category } from 'src/app/models/category';
 
 @Component({
   selector: 'app-create-expense',
@@ -15,8 +14,10 @@ import { Category } from 'src/app/models/category';
 })
 export class CreateExpensePage implements OnInit {
   form: FormGroup = new FormGroup({});
-  categories: Category[] = [];
+  categories: any[] = [];
   trip_id: string | null = '';
+  loadingSubmit = false;
+  loadingData = true;
 
   async ionViewWillEnter() {
     this.route.paramMap.subscribe(params => {
@@ -28,6 +29,7 @@ export class CreateExpensePage implements OnInit {
     private expensesService: ExpensesService,
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -53,20 +55,39 @@ export class CreateExpensePage implements OnInit {
 
   async loadCategories() {
     const { data, error } = await this.categoriesService.getCategories(this.trip_id!)
+    this.loadingData = false;
     if (data) {
-      this.categories = data
+      this.categories = data as any
     }
   }
 
   async createExpense() {
-    console.log('form', this.form.value)
+    this.loadingSubmit = true;
+    const { amount, expense_date, split_amount, is_shared, notes, title, category_id } = this.form.value;
+    const categoryIdFilter = this.categories.find(f => f.category_name === category_id)?.category_id;
 
-    const {data, error} = await this.expensesService.createExpense({...this.form.value, trip_id:this.trip_id});
-    if (error) {
-      console.error('error', error)
+    const form = {
+      amount,
+      expense_date,
+      split_amount,
+      is_shared,
+      notes,
+      title,
+      category_id: categoryIdFilter,
     }
+    
+    const {data, error} = await this.expensesService.createExpense({...form, trip_id:this.trip_id});
+    this.loadingSubmit = false;
+
     if (data) {
-      console.log('data', data)
+      this.router.navigate([`/trip-details/${this.trip_id}`]);
+    } 
+    // @TODO: 
+    //    - Handle error
+    //    - Handle success
+    
+    if (error) {
+      console.error('Error: Create Expense - Submit form', error)
     }
   }
 }

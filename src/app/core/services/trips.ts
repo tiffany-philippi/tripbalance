@@ -22,7 +22,7 @@ export class TripsService extends BaseService<Trip> {
 	async getTrip(id: string) {
 		return this.supabaseService.supabase
 			.from('trip_summary')
-			.select('*')
+			.select('name, start_date, end_date, total_budget, total_spent')
 			.eq('id', id)
 			.single();
 	}
@@ -31,7 +31,7 @@ export class TripsService extends BaseService<Trip> {
 		const [trip, categories, expenses] = await Promise.all([
 			this.supabaseService.supabase
 				.from('trip_summary')
-				.select('name, start_date, end_date, total_budget, total_spent')
+				.select('name')
 				.eq('id', tripId)
 				.single(),
 
@@ -56,5 +56,15 @@ export class TripsService extends BaseService<Trip> {
 			categories: categories.data,
 			expenses: expenses.data
 		};
+	}
+
+	getSavingsClass(planned: number, spent: number) {
+		if (this.isMoreThanZero(planned - spent)) {
+			return 'trip-savings';
+		} else return 'trip-overbudget';
+	}
+
+	isMoreThanZero(value: number) {
+		return value >= 0;
 	}
 }
