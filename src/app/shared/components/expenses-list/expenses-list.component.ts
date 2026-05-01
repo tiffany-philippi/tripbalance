@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ExpensesService } from 'src/app/core/services/expenses';
 
@@ -9,7 +9,7 @@ import { ExpensesService } from 'src/app/core/services/expenses';
   styleUrls: ['./expenses-list.component.scss'],
   imports: [IonicModule, CommonModule],
 })
-export class ExpensesListComponent  implements OnInit {
+export class ExpensesListComponent implements OnChanges {
   @Input( { required: true } ) tripId!: string | null;
 
   loading: boolean = true;
@@ -19,10 +19,11 @@ export class ExpensesListComponent  implements OnInit {
 
   constructor(private expensesService: ExpensesService) { }
 
-  ngOnInit() {
-    this.loadExpenses();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['tripId']?.currentValue) {
+      this.loadExpenses();
+    }
   }
-
   async loadExpenses() {
     const { data, error } = await this.expensesService.getExpenses(this.tripId!);
 
