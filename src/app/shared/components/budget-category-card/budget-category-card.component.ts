@@ -23,11 +23,11 @@ export class BudgetCategoryCardComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.loadData();
+    this.loadCategories();
   }
 
 
-  async loadData() {
+  async loadCategories() {
     const { data, error } = await this.categoriesService.getCategories(this.tripId!);
 
     this.loading = false;

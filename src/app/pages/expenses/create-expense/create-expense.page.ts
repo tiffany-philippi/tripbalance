@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { ExpensesService } from 'src/app/core/services/expenses';
+import { ToastService } from 'src/app/core/services/toast';
+import { CategorySummary } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-create-expense',
@@ -14,7 +16,7 @@ import { ExpensesService } from 'src/app/core/services/expenses';
 })
 export class CreateExpensePage implements OnInit {
   form: FormGroup = new FormGroup({});
-  categories: any[] = [];
+  categories: CategorySummary[] = [];
   trip_id: string | null = '';
   loadingSubmit = false;
   loadingData = true;
@@ -30,6 +32,7 @@ export class CreateExpensePage implements OnInit {
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
     private router: Router,
+    private toastService: ToastService,
   ) { }
 
   ngOnInit() {
@@ -59,34 +62,34 @@ export class CreateExpensePage implements OnInit {
     if (data) {
       this.categories = data as any
     }
+
+    if (error) {
+      await this.toastService.error('Ocorreu um erro ao carregar categorias');
+      console.error('Error loading categories', error);
+    }
   }
 
   async createExpense() {
-    this.loadingSubmit = true;
-    const { amount, expense_date, split_amount, is_shared, notes, title, category_id } = this.form.value;
-    const categoryIdFilter = this.categories.find(f => f.category_name === category_id)?.category_id;
-
-    const form = {
-      amount,
-      expense_date,
-      split_amount,
-      is_shared,
-      notes,
-      title,
-      category_id: categoryIdFilter,
+    if (this.form.invalid) {
+      this.toastService.warning('Preencha todos os campos');
+      return;
     }
     
-    const {data, error} = await this.expensesService.createExpense({...form, trip_id:this.trip_id});
+    this.loadingSubmit = true;
+    
+    const {data, error} = await this.expensesService.createExpense({...this.form.value, trip_id:this.trip_id});
     this.loadingSubmit = false;
 
+    console.log('data', data);
+
     if (data) {
+      this.form.reset();
+      await this.toastService.success('Despesa criada com sucesso!');
       this.router.navigate([`/trip-details/${this.trip_id}`]);
     } 
-    // @TODO: 
-    //    - Handle error
-    //    - Handle success
     
     if (error) {
+      await this.toastService.error('Ocorreu um erro ao criar despesa');
       console.error('Error: Create Expense - Submit form', error)
     }
   }

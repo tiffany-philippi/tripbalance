@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { IonicModule } from '@ionic/angular'
+import { ToastService } from 'src/app/core/services/toast'
 import { TripsService } from 'src/app/core/services/trips'
-import { Trip } from 'src/app/models/trip'
+import { Trip } from 'src/app/models/trip.model'
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomePage implements OnInit {
 
   constructor(
     private tripsService: TripsService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) { }
 
   async ngOnInit() {
@@ -28,6 +30,11 @@ export class HomePage implements OnInit {
     const { data, error } = await this.tripsService.getTrips()
     if (data) {
       this.tripsList = data
+    }
+
+    if (error) {
+      await this.toastService.error('Erro ao carregar viagens');
+      console.error('Error loading trips', error);
     }
   }
 

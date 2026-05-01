@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base';
-import { Expense } from 'src/app/models/expense';
 import { SupabaseService } from '../supabase';
+import { ExpenseItem } from 'src/app/models/trip.model';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class ExpensesService extends BaseService<Expense> {
+export class ExpensesService extends BaseService<ExpenseItem> {
 
 	constructor(supabase: SupabaseService) {
 		super(supabase, 'expenses')
@@ -31,7 +31,6 @@ export class ExpensesService extends BaseService<Expense> {
 				)
 			`)
 			.eq('trip_id', tripId)
-			// .order('expense_date', { ascending: false })
 
 		return { data, error }
 	}
