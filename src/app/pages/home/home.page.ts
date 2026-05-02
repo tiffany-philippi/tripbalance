@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { IonicModule } from '@ionic/angular'
+import { HeaderService } from 'src/app/core/services/header'
 import { ToastService } from 'src/app/core/services/toast'
 import { TripsService } from 'src/app/core/services/trips'
 import { Trip } from 'src/app/models/trip.model'
@@ -19,8 +20,13 @@ export class HomePage implements OnInit {
   constructor(
     private tripsService: TripsService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private headerService: HeaderService
   ) { }
+
+  ionViewWillEnter() {
+    this.headerService.setHeader('Minhas Viagens', false);
+  }
 
   async ngOnInit() {
     await this.loadTrips()

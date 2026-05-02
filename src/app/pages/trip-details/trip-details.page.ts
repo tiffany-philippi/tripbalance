@@ -43,11 +43,11 @@ export class TripDetailsPage {
 		private toastService: ToastService
 	) { }
 
-
 	ionViewWillEnter() {
 		this.route.paramMap.subscribe(async params => {
 			this.tripId = params.get('id') as string;
 			await this.loadTrip();
+			this.headerService.setHeader(this.trip?.name ?? 'Detalhes', true);
 			this.loadingID = false;
 		});
 	}
@@ -62,7 +62,6 @@ export class TripDetailsPage {
 		const { data, error } = await this.tripsService.getTrip(this.tripId);
 		if (data) {
 			this.trip = data as Trip;
-			this.headerService.setTitle(this.trip.name);
 		}
 		if (error) {
 			await this.toastService.error('Erro ao carregar viagem');
