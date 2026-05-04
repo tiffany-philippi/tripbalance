@@ -16,12 +16,13 @@ import { Trip } from 'src/app/models/trip.model'
 export class HomePage implements OnInit {
 
   tripsList: Trip[] = []
+  loading: boolean = true
 
   constructor(
     private tripsService: TripsService,
     private router: Router,
     private toastService: ToastService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
   ) { }
 
   ionViewWillEnter() {
@@ -34,10 +35,9 @@ export class HomePage implements OnInit {
 
   async loadTrips() {
     const { data, error } = await this.tripsService.getTrips()
-    if (data) {
-      this.tripsList = data
-    }
-
+    this.loading = false;
+    
+    if (data) this.tripsList = data;
     if (error) {
       await this.toastService.error('Erro ao carregar viagens');
       console.error('Error loading trips', error);
@@ -47,9 +47,4 @@ export class HomePage implements OnInit {
   openTrip(trip: Trip) {
     this.router.navigate(['/trip-details', trip.id]);
   }
-
-  addTrip() {
-    
-  }
-
 }

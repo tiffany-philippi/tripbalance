@@ -1,5 +1,3 @@
-// src/app/core/models/trip.model.ts
-
 export interface Trip {
     id: string;
     name: string;
@@ -26,15 +24,18 @@ export interface CategorySummary {
     spent: number;
 }
 
+export interface CategoryColorKey {
+    color_key: string;
+}
+
 export interface ExpenseItem {
     id: string;
     trip_id: string;
     title: string;
     amount: number;
-    date: string;
+    expense_date: string;
     is_shared: boolean;
     category_id: string;
     split_amount: number;
-    category_name: string;
-    color_key: string;
+    categories: CategoryColorKey;
 }

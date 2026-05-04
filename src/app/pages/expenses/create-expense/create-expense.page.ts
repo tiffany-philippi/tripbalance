@@ -78,20 +78,18 @@ export class CreateExpensePage implements OnInit {
       this.toastService.warning('Preencha todos os campos');
       return;
     }
-    
-    this.loadingSubmit = true;
-    
-    const {data, error} = await this.expensesService.createExpense({...this.form.value, trip_id:this.trip_id});
-    this.loadingSubmit = false;
 
-    console.log('data', data);
+    this.loadingSubmit = true;
+
+    const { data, error } = await this.expensesService.createExpense({ ...this.form.value, trip_id: this.trip_id });
+    this.loadingSubmit = false;
 
     if (data) {
       this.form.reset();
       await this.toastService.success('Despesa criada com sucesso!');
       this.router.navigate([`/trip-details/${this.trip_id}`]);
-    } 
-    
+    }
+
     if (error) {
       await this.toastService.error('Ocorreu um erro ao criar despesa');
       console.error('Error: Create Expense - Submit form', error)

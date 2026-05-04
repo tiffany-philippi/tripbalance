@@ -1,4 +1,4 @@
-<ion-list class="expenses-list" *ngIf="expenses && expenses.length > 0; else noExpenses">
+<ion-list class="expenses-list" *ngIf="expenses && expenses.length > 0">
   <ion-item class="expenses-list-item row justify-between" *ngFor="let expense of expenses">
 
     <span [class]="'expense-category-square' + ' ' + expense.categories.color_key"></span>
@@ -15,6 +15,10 @@
   </ion-item>
 </ion-list>
 
-<ng-template #noExpenses>
+<ng-template *ngIf="expenses && expenses.length === 0">
   <ion-label>No expenses yet.</ion-label>
+</ng-template>
+
+<ng-template *ngIf="hasError">
+  <ion-label class="text-align-center text-color-error">Something went wrong.</ion-label>
 </ng-template>
