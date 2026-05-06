@@ -70,12 +70,16 @@
 
 // TYPOGRAPHY
 p {
-    margin: 4px;
+    margin: 4px 0;
 }
 
 .tb-text {
     font-weight: 400;
     color: var(--ion-text-color);
+}
+
+.tb-color-primary {
+    color: var(--ion-color-primary);
 }
 
 .tb-color-subtitle {
@@ -84,6 +88,10 @@ p {
 
 .text-bold {
     font-weight: bold;
+}
+
+.font-weight-400 {
+    font-weight: 400;
 }
 
 .text-12 {
@@ -96,6 +104,10 @@ p {
 
 .text-24 {
     font-size: 24px;
+}
+
+.text-40 {
+    font-size: 40px;
 }
 
 .text-align-right {
