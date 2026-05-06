@@ -10,10 +10,16 @@
 				<ion-card-title>{{ trip.name }}</ion-card-title>
 				<ion-card-subtitle>{{ trip.start_date }} - {{ trip.end_date }}</ion-card-subtitle>
 			</ion-card-header>
-			
+
 			<ion-card-content>
 				<p>{{ (trip.total_budget | currency:'R$ ') || "Not estimated" }}</p>
 			</ion-card-content>
 		</ion-card>
+
+		<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+			<ion-fab-button (click)="createTrip()">
+				<ion-icon name="add"></ion-icon>
+			</ion-fab-button>
+		</ion-fab>
 	</ng-template>
 </div>
