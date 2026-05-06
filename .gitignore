@@ -5,7 +5,6 @@
 /coverage/
 /e2e/test-output/
 /.angular/
-.angular/
 
 # Node modules and dependency files
 /node_modules/
@@ -43,7 +42,6 @@ log.txt
 
 /.sourcemaps
 /.versions
-/coverage
 
 # Ionic
 /.ionic
@@ -52,8 +50,6 @@ log.txt
 /plugins
 
 # Compiled output
-/dist
-/tmp
 /out-tsc
 /bazel-out
 
@@ -74,21 +70,14 @@ yarn-error.log
 
 # Visual Studio Code
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
 
 # Miscellaneous
-/.angular
-/.angular/cache
 .sass-cache/
 /.nx
 /.nx/cache
 /connect.lock
-/coverage
 /libpeerconnection.log
 testem.log
 /typings
