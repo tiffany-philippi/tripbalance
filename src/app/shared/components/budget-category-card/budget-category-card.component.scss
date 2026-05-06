@@ -79,7 +79,26 @@
         }
 
         p {
-            margin: 4px;
+            margin: 0 4px;
+        }
+
+        @media (max-width: 320px) {
+            p {
+                max-width: 70%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                font-size: 14px;
+
+                &.budget-savings-overview {
+                    max-width: 100%;
+                    font-size: 12px;
+                }
+            }
+
+            ion-icon {
+                display: none;
+            }
         }
     }
 }

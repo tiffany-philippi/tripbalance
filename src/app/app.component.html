@@ -2,12 +2,12 @@
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-buttons slot="start" *ngIf="headerService.showBackButton()">
-        <ion-back-button></ion-back-button>
+        <ion-button (click)="goBack()">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+        </ion-button>
       </ion-buttons>
 
       <ion-title>{{ headerService.title() }}</ion-title>
-
-      <ion-progress-bar type="indeterminate"></ion-progress-bar>
     </ion-toolbar>
   </ion-header>
 
