@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ExpensesService } from 'src/app/core/services/expenses';
+import { ToastService } from 'src/app/core/services/toast';
+import { ExpenseItem } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-expenses-list',
@@ -10,14 +12,16 @@ import { ExpensesService } from 'src/app/core/services/expenses';
   imports: [IonicModule, CommonModule],
 })
 export class ExpensesListComponent implements OnChanges {
-  @Input( { required: true } ) tripId!: string | null;
+  @Input({ required: true }) tripId!: string | null;
 
+  expenses: ExpenseItem[] = [];
   loading: boolean = true;
   hasError: boolean = false;
-  expenses: any[] = [];
 
-
-  constructor(private expensesService: ExpensesService) { }
+  constructor(
+    private expensesService: ExpensesService,
+    private toastService: ToastService,
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tripId']?.currentValue) {
@@ -28,8 +32,13 @@ export class ExpensesListComponent implements OnChanges {
     const { data, error } = await this.expensesService.getExpenses(this.tripId!);
 
     this.loading = false;
-    this.expenses = data!;
-    this.hasError = error !== null;
+    this.expenses = data as ExpenseItem[];
+
+    if (error) {
+      this.hasError = true;
+      await this.toastService.error('Ocorreu um erro ao carregar despesas');
+      console.error('Error loading expenses', error);
+    }
   }
 
   splitAmount(amount: number, split: number) {

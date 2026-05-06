@@ -34,7 +34,8 @@ export class TripDetailsPage {
 	trip!: Trip;
 	categories: CategorySummary[] = [];
 	expenses: ExpenseItem[] = [];
-	loadingID = true;
+
+	loading: boolean = true;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -43,15 +44,16 @@ export class TripDetailsPage {
 		private toastService: ToastService
 	) { }
 
-
 	ionViewWillEnter() {
 		this.route.paramMap.subscribe(async params => {
 			this.tripId = params.get('id') as string;
 			await this.loadTrip();
-			this.loadingID = false;
+			this.headerService.setHeader(this.trip?.name ?? 'Detalhes', true);
+			this.loading = false;
 		});
 	}
 
+	/* It watches for changes in the expensesList, categoryCard, and budgetOverview and updates previously loaded data */
 	ionViewDidEnter() {
 		this.expensesList?.loadExpenses();
 		this.categoryCard?.loadCategories();
@@ -60,10 +62,8 @@ export class TripDetailsPage {
 
 	async loadTrip() {
 		const { data, error } = await this.tripsService.getTrip(this.tripId);
-		if (data) {
-			this.trip = data as Trip;
-			this.headerService.setTitle(this.trip.name);
-		}
+
+		if (data) this.trip = data as Trip;
 		if (error) {
 			await this.toastService.error('Erro ao carregar viagem');
 			console.error('Error loading trip', error);
@@ -72,10 +72,5 @@ export class TripDetailsPage {
 
 	addExpense() {
 		this.router.navigate([`trip-details/${this.tripId}/create-expense`])
-	}
-
-	addBudget() {
-		// @TODO: Create budget page
-		//this.router.navigate([`trip-details/${this.tripId}/create-budget`])
 	}
 }

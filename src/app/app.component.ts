@@ -9,9 +9,6 @@ import { HeaderService } from './core/services/header';
 })
 export class AppComponent {
   headerService = inject(HeaderService);
-  
-  ionViewWillEnter() {
-    this.headerService.setTitle('Minhas Viagens');
-  }
+
   constructor() {}
 }

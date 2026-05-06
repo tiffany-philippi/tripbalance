@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { ExpensesService } from 'src/app/core/services/expenses';
+import { HeaderService } from 'src/app/core/services/header';
 import { ToastService } from 'src/app/core/services/toast';
 import { CategorySummary } from 'src/app/models/trip.model';
 
@@ -21,19 +22,22 @@ export class CreateExpensePage implements OnInit {
   loadingSubmit = false;
   loadingData = true;
 
-  async ionViewWillEnter() {
-    this.route.paramMap.subscribe(params => {
-      this.trip_id = params.get('id');
-      this.loadCategories();
-    });
-  }
   constructor(
     private expensesService: ExpensesService,
     private categoriesService: CategoriesService,
     private route: ActivatedRoute,
     private router: Router,
     private toastService: ToastService,
+    private headerService: HeaderService
   ) { }
+
+  async ionViewWillEnter() {
+    this.route.paramMap.subscribe(params => {
+      this.trip_id = params.get('id');
+      this.loadCategories();
+      this.headerService.setHeader('Nova Despesa', true);
+    });
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -74,20 +78,18 @@ export class CreateExpensePage implements OnInit {
       this.toastService.warning('Preencha todos os campos');
       return;
     }
-    
-    this.loadingSubmit = true;
-    
-    const {data, error} = await this.expensesService.createExpense({...this.form.value, trip_id:this.trip_id});
-    this.loadingSubmit = false;
 
-    console.log('data', data);
+    this.loadingSubmit = true;
+
+    const { data, error } = await this.expensesService.createExpense({ ...this.form.value, trip_id: this.trip_id });
+    this.loadingSubmit = false;
 
     if (data) {
       this.form.reset();
       await this.toastService.success('Despesa criada com sucesso!');
       this.router.navigate([`/trip-details/${this.trip_id}`]);
-    } 
-    
+    }
+
     if (error) {
       await this.toastService.error('Ocorreu um erro ao criar despesa');
       console.error('Error: Create Expense - Submit form', error)
