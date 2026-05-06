@@ -27,6 +27,13 @@ export class TripsService extends BaseService<Trip> {
 			.single();
 	}
 
+	async createTrip(trip: Trip) {
+		return this.supabaseService.supabase
+			.from('trips')
+			.insert(trip)
+			.select();
+	}
+
 	getSavingsClass(planned: number, spent: number) {
 		if (this.isMoreThanZero(planned - spent)) {
 			return 'trip-savings';

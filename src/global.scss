@@ -132,6 +132,10 @@ p {
     }
 }
 
+.tb-field-container {
+    margin: 16px 0;
+}
+
 .tb-custom-field {
     --border-color: var(--ion-border-color) !important;
     --placeholder-color: var(--ion-text-placeholder-color);
@@ -142,6 +146,15 @@ p {
     &.tb-textarea {
         min-height: 100px !important;
     }
+}
+
+.tb-primary-button {
+    --background: var(--ion-color-primary);
+    height: 50px;
+    --border-radius: 8px;
+    --box-shadow: none;
+    --color: white;
+    font-weight: bold;
 }
 
 ion-datetime-button::part(native) {

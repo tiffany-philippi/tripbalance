@@ -1,15 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>create-trip</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="tb-container tb-trip-form">
+	<h1>Create Trip</h1> <!-- @TODO: i18n -->
+	<form [formGroup]="form" (ngSubmit)="createTrip()">
+		<div class="tb-field-container">
+			<ion-input formControlName="name" type="text" label="Name" class="tb-custom-field"
+				label-placement="floating" fill="outline" placeholder="Type the trip name"></ion-input>
+		</div>
+		<div class="row align-center gap-16">
+			<div class="tb-field-container col">
+				<ion-label>Start date</ion-label>
+				<ion-datetime-button datetime="startdate"></ion-datetime-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">create-trip</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+				<ion-modal [keepContentsMounted]="true">
+					<ng-template>
+						<ion-datetime presentation="date" locale="en-ES" formControlName="start_date"
+							id="startdate"></ion-datetime>
+					</ng-template>
+				</ion-modal>
+			</div>
 
-<!-- @TODO: Create Trip -->
+			<div class="tb-field-container col">
+				<ion-label>End date</ion-label>
+				<ion-datetime-button datetime="enddate"></ion-datetime-button>
+
+				<ion-modal [keepContentsMounted]="true">
+					<ng-template>
+						<ion-datetime presentation="date" locale="en-ES" formControlName="end_date"
+							id="enddate"></ion-datetime>
+					</ng-template>
+				</ion-modal>
+			</div>
+		</div>
+
+		<ion-button 
+			[disabled]="loadingSubmit" 
+			class="w-100 tb-primary-button" 
+			type="submit">Create</ion-button>
+	</form>
+</div>

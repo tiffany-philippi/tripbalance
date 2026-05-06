@@ -53,19 +53,14 @@ export class CreateExpensePage implements OnInit {
   }
 
   changeCounterStatus(status: boolean) {
-    if (status) {
-      this.form.get('split_amount')?.enable()
-    } else {
-      this.form.get('split_amount')?.disable()
-    }
+    if (status) this.form.get('split_amount')?.enable()
+    else this.form.get('split_amount')?.disable()
   }
 
   async loadCategories() {
     const { data, error } = await this.categoriesService.getCategories(this.trip_id!)
     this.loadingData = false;
-    if (data) {
-      this.categories = data as any
-    }
+    if (data) this.categories = data as any
 
     if (error) {
       await this.toastService.error('Ocorreu um erro ao carregar categorias');
