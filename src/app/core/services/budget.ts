@@ -31,4 +31,12 @@ export class BudgetService {
 
 		return { data, error }
 	}
+
+	async createBudgets(rows: { trip_id: string; category_id: string; planned_amount: number }[]) {
+		const { error } = await this.supabaseService.supabase
+			.from('budgets')
+			.insert(rows);
+
+		return { error };
+	}
 }

@@ -53,7 +53,7 @@ export class CreateTripPage implements OnInit {
     if (data) {
       this.form.reset();
       await this.toastService.success('Trip created successfully!');
-      this.router.navigate(['/home']);
+      this.router.navigate([`/trip-setup/${data[0].id}/categories`]);
     }
 
     if (error) {

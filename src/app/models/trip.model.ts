@@ -15,13 +15,18 @@ export interface TripBalance {
 }
 
 export interface CategorySummary {
-    trip_id: string;
     category_id: string;
     category_name: string;
     color_key: string;
     icon: string;
     planned: number;
     spent: number;
+}
+
+export interface TripCategory {
+    id: string;
+    trip_id: string;
+    category_id: string;
 }
 
 export interface CategoryColorKey {

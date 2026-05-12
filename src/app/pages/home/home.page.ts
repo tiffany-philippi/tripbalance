@@ -49,6 +49,6 @@ export class HomePage implements OnInit {
   }
 
   createTrip() {
-    this.router.navigate(['/create-trip']);
+    this.router.navigate(['/trip-setup/create']);
   }
 }
