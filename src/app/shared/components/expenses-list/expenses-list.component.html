@@ -15,9 +15,9 @@
   </ion-item>
 </ion-list>
 
-<ng-template *ngIf="expenses && expenses.length === 0">
+<div *ngIf="expenses && expenses.length == 0">
   <ion-label>No expenses yet.</ion-label>
-</ng-template>
+</div>
 
 <ng-template *ngIf="hasError">
   <ion-label class="text-align-center text-color-error">Something went wrong.</ion-label>

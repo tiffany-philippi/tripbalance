@@ -1,0 +1,19 @@
+<div class="tb-budget-list" *ngIf="!loadingData">
+  <form [formGroup]="form">
+    <div *ngFor="let category of categories" [ngClass]="'tb-budget-item tb-budget-item__' + category.color_key">
+      <div class="tb-budget-item__title">
+        <ion-icon [name]="category.icon"></ion-icon>
+        <span>{{ category.category_name }}</span>
+      </div>
+      <ion-input [formControlName]="category.category_id" type="number" placeholder="0.00" fill="outline"
+        class="tb-custom-field">
+      </ion-input>
+    </div>
+  </form>
+</div>
+
+<div class="tb-footer">
+  <ion-button class="w-100 tb-primary-button" [disabled]="loadingSubmit" (click)="saveBudget()">
+    Save Budget
+  </ion-button>
+</div>

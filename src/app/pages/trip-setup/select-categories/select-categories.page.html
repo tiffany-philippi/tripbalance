@@ -1,0 +1,16 @@
+<div class="tb-checkbox-list">
+	<div *ngFor="let category of defaultCategories" class="tb-category-item" [class.selected]="isSelected(category.id)"
+		(click)="toggleCategory(category.id)">
+
+		<ion-icon [name]="category.icon"></ion-icon>
+		<span>{{ category.name }}</span>
+		<ion-icon *ngIf="isSelected(category.id)" name="checkmark-circle" class="check-icon">
+		</ion-icon>
+	</div>
+</div>
+
+<div class="tb-footer">
+	<ion-button class="w-100 tb-primary-button" [disabled]="loadingSubmit" (click)="confirm()">
+		Next
+	</ion-button>
+</div>
