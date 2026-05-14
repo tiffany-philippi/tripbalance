@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SupabaseService } from '../supabase';
+import { SupabaseService } from './supabase';
 
 @Injectable({
 	providedIn: 'root',

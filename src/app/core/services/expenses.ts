@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base';
-import { SupabaseService } from '../supabase';
+import { SupabaseService } from './supabase';
 import { ExpenseItem } from 'src/app/models/trip.model';
 
 @Injectable({
