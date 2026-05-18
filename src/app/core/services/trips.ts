@@ -34,13 +34,6 @@ export class TripsService extends BaseService<Trip> {
 			.select();
 	}
 
-	async deleteTip(id: string) {
-		return this.supabaseService.supabase
-			.from('trips')
-			.delete()
-			.eq('id', id);
-	}
-
 	getSavingsClass(planned: number, spent: number) {
 		if (this.isMoreThanZero(planned - spent)) {
 			return 'trip-savings';

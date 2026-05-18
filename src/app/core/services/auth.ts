@@ -38,11 +38,20 @@ export class AuthService {
   }
 
   async isAuthenticated(): Promise<boolean> {
-    const { data } = await this.supabaseService.supabase.auth.getSession();
+    const { data, error } = await this.supabaseService.supabase.auth.getSession();
 
+    if (error) {
+      this.toastService.error('Oops, something went wrong');
+      return false;
+    }
     if (data.session) return true;
 
-    const { data: refreshData } = await this.supabaseService.supabase.auth.refreshSession();
+    const { data: refreshData, error: refreshError } = await this.supabaseService.supabase.auth.refreshSession();
+
+    if (refreshError) {
+      this.toastService.error('Oops, something went wrong');
+      return false;
+    }
     return !!refreshData.session;
   }
 }
