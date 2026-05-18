@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { HeaderService } from './core/services/header';
 import { NavController } from '@ionic/angular';
+import { AuthService } from './core/services/auth';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { NavController } from '@ionic/angular';
 })
 export class AppComponent {
   headerService = inject(HeaderService);
+  authService = inject(AuthService);
   private navController = inject(NavController);
 
   constructor() {}

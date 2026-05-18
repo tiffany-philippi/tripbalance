@@ -8,6 +8,12 @@
       </ion-buttons>
 
       <ion-title>{{ headerService.title() }}</ion-title>
+
+      <ion-buttons slot="end" *ngIf="authService.loggedIn()">
+        <ion-button (click)="authService.signOut()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 

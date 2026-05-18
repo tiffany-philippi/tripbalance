@@ -1,13 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService } from './supabase';
+import { ToastService } from './toast';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  loggedIn = signal<boolean>(false);
+  
   constructor(
     private supabaseService: SupabaseService,
     private router: Router,
-  ) { }
+    private toastService: ToastService
+  ) { 
+    this.supabaseService.supabase.auth.onAuthStateChange((event, session) => {
+      this.loggedIn.set(!!session);
+    });
+  }
 
   async signIn(email: string, password: string) {
     const { data, error } = await this.supabaseService.supabase.auth
@@ -17,7 +25,10 @@ export class AuthService {
 
   async signOut() {
     const { error } = await this.supabaseService.supabase.auth.signOut();
-    if (!error) this.router.navigate(['/login']);
+    if (!error) {
+      this.router.navigate(['/login']);
+      this.toastService.success('You have been logged out!');
+    }
     return { error };
   }
 

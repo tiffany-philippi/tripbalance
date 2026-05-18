@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base';
 import { Trip } from 'src/app/models/trip.model'
-import { SupabaseService } from '../supabase';
+import { SupabaseService } from './supabase';
 
 @Injectable({
 	providedIn: 'root',
@@ -32,6 +32,13 @@ export class TripsService extends BaseService<Trip> {
 			.from('trips')
 			.insert(trip)
 			.select();
+	}
+
+	async deleteTip(id: string) {
+		return this.supabaseService.supabase
+			.from('trips')
+			.delete()
+			.eq('id', id);
 	}
 
 	getSavingsClass(planned: number, spent: number) {
