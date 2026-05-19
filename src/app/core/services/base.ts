@@ -1,4 +1,4 @@
-import { SupabaseService } from "../supabase"
+import { SupabaseService } from "./supabase"
 
 export abstract class BaseService<T> {
 

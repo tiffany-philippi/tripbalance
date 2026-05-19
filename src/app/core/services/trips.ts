@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base';
 import { Trip } from 'src/app/models/trip.model'
-import { SupabaseService } from '../supabase';
+import { SupabaseService } from './supabase';
 
 @Injectable({
 	providedIn: 'root',

@@ -1,0 +1,24 @@
+<div class="tb-container tb-login">
+	<div class="tb-login__header">
+		<h1>Welcome back</h1>
+		<p>Sign in to continue</p>
+	</div>
+
+	<form [formGroup]="form">
+		<div class="tb-field-container">
+			<ion-input formControlName="email" type="email" label="Email" label-placement="floating" fill="outline"
+				class="tb-custom-field" placeholder="your@email.com">
+			</ion-input>
+		</div>
+
+		<div class="tb-field-container">
+			<ion-input formControlName="password" type="password" label="Password" label-placement="floating"
+				fill="outline" class="tb-custom-field" placeholder="••••••••">
+			</ion-input>
+		</div>
+
+		<ion-button class="w-100 tb-primary-button" [disabled]="loadingSubmit" (click)="signIn()">
+			Sign In
+		</ion-button>
+	</form>
+</div>
