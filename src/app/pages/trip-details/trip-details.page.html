@@ -2,7 +2,7 @@
 
 <ng-template #loaded>
   <div class="tb-trip-details tb-container">
-    <ng-container *ngIf="trip.total_budget > 0; else noBudget">
+    <ng-container *ngIf="trip.total_budget && trip.total_budget > 0; else noBudget">
       <app-trip-budget-overview [trip]="trip"></app-trip-budget-overview>
 
       <h2>Categories</h2>

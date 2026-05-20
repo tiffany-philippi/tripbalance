@@ -46,6 +46,6 @@ export class BudgetCategoryCardComponent implements OnInit {
   }
 
   openCategorySelectionPage() {
-    this.router.navigate([`trip-setup/${this.tripId}/categories`])
+    this.router.navigate([`trip-setup/${this.tripId!}/categories`])
   }
 }
