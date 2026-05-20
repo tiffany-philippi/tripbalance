@@ -1,5 +1,5 @@
 <div class="tb-container">
-	<h1>Viagens</h1>
+	<h1>Trips</h1>
 	<ng-container *ngIf="loading; else loaded">
 		<ion-spinner></ion-spinner>
 	</ng-container>
@@ -12,7 +12,7 @@
 			</ion-card-header>
 
 			<ion-card-content>
-				<p>{{ (trip.total_budget | currency:'R$ ') || "Not estimated" }}</p>
+				<p>{{ (trip.total_budget | currency:'$ ') || "Not estimated" }}</p>
 			</ion-card-content>
 		</ion-card>
 

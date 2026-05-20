@@ -8,9 +8,9 @@
     </div>
 
     <div class="expense-price-section col text-align-right">
-      <p class="text-14">{{ expense.amount | currency:'BRL ' }}</p>
+      <p class="text-14">{{ expense.amount | currency:'USD ' }}</p>
       <p *ngIf="expense.is_shared" class="tb-color-subtitle text-12">{{ splitAmount(expense.amount,
-        expense.split_amount) | currency:'BRL ' }} / each</p>
+        expense.split_amount) | currency:'USD ' }} / each</p>
     </div>
   </ion-item>
 </ion-list>

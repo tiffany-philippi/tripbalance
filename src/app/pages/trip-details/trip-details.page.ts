@@ -65,7 +65,7 @@ export class TripDetailsPage {
 
 		if (data) this.trip = data as Trip;
 		if (error) {
-			await this.toastService.error('Erro ao carregar viagem');
+			await this.toastService.error('Oops, something went wrong');
 			console.error('Error loading trip', error);
 		}
 	}

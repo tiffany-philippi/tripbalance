@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { TripsService } from 'src/app/core/services/trips';
@@ -20,6 +21,7 @@ export class BudgetCategoryCardComponent implements OnInit {
   constructor(
     private tripsService: TripsService,
     private categoriesService: CategoriesService,
+    private router: Router,
   ) { }
 
   ngOnInit() { 
@@ -43,8 +45,7 @@ export class BudgetCategoryCardComponent implements OnInit {
     return this.tripsService.isMoreThanZero(value);
   }
 
-  // @TODO: Create category page 
-  openCategory(category: any) {
-    // this.router.navigate([`trip-details/${this.tripId}/category/${category.id}`])
+  openCategorySelectionPage() {
+    this.router.navigate([`trip-setup/${this.tripId}/categories`])
   }
 }

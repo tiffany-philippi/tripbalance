@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
 
   async signIn() {
     if (this.form.invalid) {
-      await this.toastService.warning('Fill in all fields');
+      await this.toastService.warning('Fill in all fields before continuing');
       return;
     }
 

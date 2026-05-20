@@ -44,7 +44,7 @@ export class SelectCategoriesPage implements OnInit {
 
 		if (data) this.defaultCategories = data as any;
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('There was an error loading categories');
 			console.error('Error loading categories', error);
 		}
 	}
@@ -75,7 +75,7 @@ export class SelectCategoriesPage implements OnInit {
 		this.loadingSubmit = false;
 
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('Oops, something went wrong. Try again.');
 			return;
 		}
 
