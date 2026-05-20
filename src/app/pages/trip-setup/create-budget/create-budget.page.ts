@@ -12,7 +12,7 @@ import { CategorySummary } from 'src/app/models/trip.model';
 @Component({
 	selector: 'app-create-budget',
 	templateUrl: './create-budget.page.html',
-	styleUrls: ['./create-budget.page.scss'],
+	styleUrls: ['./create-budget.page.scss', '../trip-setup.scss'],
 	imports: [CommonModule, IonicModule, ReactiveFormsModule],
 })
 export class CreateBudgetPage {

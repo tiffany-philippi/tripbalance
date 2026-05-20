@@ -1,4 +1,10 @@
 <div class="tb-budget-list" *ngIf="!loadingData">
+  <div class="tb-steps">
+    <span></span>
+    <span></span>
+    <span class="active"></span>
+  </div>
+  
   <form [formGroup]="form">
     <div *ngFor="let category of categories" [ngClass]="'tb-budget-item tb-budget-item__' + category.color_key">
       <div class="tb-budget-item__title">

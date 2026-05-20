@@ -15,7 +15,7 @@
           <ion-icon *ngIf="!isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-down-outline"></ion-icon>
         </ng-container>
 
-        <p class="text-12 budget-savings-overview">{{ (ctg.planned - ctg.spent) | currency:'$ ' }}
+        <p class="text-12 budget-savings-overview">{{ (ctg.planned - ctg.spent) | currency:'$' }}
         </p>
       </div>
     </div>

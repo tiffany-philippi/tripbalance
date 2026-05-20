@@ -9,7 +9,7 @@ import { ToastService } from 'src/app/core/services/toast';
 @Component({
 	selector: 'app-select-categories',
 	templateUrl: './select-categories.page.html',
-	styleUrls: ['./select-categories.page.scss'],
+	styleUrls: ['./select-categories.page.scss', '../trip-setup.scss'],
 	imports: [CommonModule, IonicModule],
 })
 export class SelectCategoriesPage implements OnInit {

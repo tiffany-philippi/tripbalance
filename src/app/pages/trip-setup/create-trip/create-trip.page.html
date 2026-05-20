@@ -1,4 +1,10 @@
 <div class="tb-container tb-trip-form">
+	<div class="tb-steps">
+		<span class="active"></span>
+		<span></span>
+		<span></span>
+	</div>
+
 	<h1>Create Trip</h1> <!-- @TODO: i18n -->
 	<form [formGroup]="form" (ngSubmit)="createTrip()">
 		<div class="tb-field-container">
@@ -31,9 +37,6 @@
 			</div>
 		</div>
 
-		<ion-button 
-			[disabled]="loadingSubmit" 
-			class="w-100 tb-primary-button" 
-			type="submit">Create</ion-button>
+		<ion-button [disabled]="loadingSubmit" class="w-100 tb-primary-button" type="submit">Create</ion-button>
 	</form>
 </div>

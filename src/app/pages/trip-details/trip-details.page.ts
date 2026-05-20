@@ -73,4 +73,8 @@ export class TripDetailsPage {
 	addExpense() {
 		this.router.navigate([`trip-details/${this.tripId}/expense`])
 	}
+
+	setupBudget(tripId: string) {
+		this.router.navigate([`trip-setup/${tripId}/categories`])
+	}
 }

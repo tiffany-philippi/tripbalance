@@ -1,4 +1,25 @@
 @import 'src/app/shared/styles/trip-details';
 
-.tb-trip-details {
+.tb-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    ion-icon {
+        font-size: 64px;
+        color: var(--tb-secondary);
+    }
+
+    ion-button {
+        --background: var(--ion-color-primary);
+        height: 50px;
+        --border-radius: 8px;
+        --box-shadow: none;
+        --color: white;
+        font-weight: bold;
+        margin-top: 16px;
+        width: 100%;
+    }
 }

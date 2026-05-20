@@ -1,8 +1,7 @@
 <div class="tb-container tb-expense-form">
-  <h1>Create Expense</h1>
   <form [formGroup]="form" (ngSubmit)="createExpense()">
     <div class="tb-field-container row">
-      <ion-input errorText="This field is required" required label="Expense" formControlName="title" class="tb-custom-field" label-placement="floating" fill="outline"
+      <ion-input errorText="This field is required" required label="Expense" formControlName="title" class="tb-custom-field" label-placement="floating" fill="outline" type="text"
         placeholder="Type the expense name"></ion-input>
     </div>
 
@@ -10,7 +9,7 @@
 
       <div class="tb-field-container col">
         <ion-input formControlName="amount" type="number" label="Amount" class="tb-custom-field" label-placement="floating" fill="outline">
-          <div slot="start">$ </div>
+          <div slot="start">$</div>
         </ion-input>
       </div>
 

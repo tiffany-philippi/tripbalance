@@ -82,7 +82,7 @@ export class CreateExpensePage implements OnInit {
     if (data) {
       this.form.reset();
       await this.toastService.success('Expense created successfully!');
-      this.router.navigate([`/trip-details/${this.trip_id}`]);
+      this.router.navigate([`/trip-details/${this.trip_id}`], { replaceUrl: true });
     }
 
     if (error) {
