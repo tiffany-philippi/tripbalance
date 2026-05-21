@@ -96,7 +96,13 @@ export class CreateBudgetPage {
 		}
 
 		if (!this.isEditMode) {
-			await this.tripsService.activateTrip(this.tripId);
+			const { error: activateError } = await this.tripsService.activateTrip(this.tripId);
+
+			if (activateError) {
+				await this.toastService.error('Budget saved, but activating the trip failed. Try again.');
+				console.error('Error activating trip', activateError);
+				return;
+			}
 		}
 
 		await this.toastService.success('Budget saved successfully!');
