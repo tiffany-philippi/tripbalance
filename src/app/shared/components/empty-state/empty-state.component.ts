@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
@@ -12,6 +12,6 @@ export class EmptyStateComponent {
   @Input() icon: string = 'alert-circle-outline';
   @Input() title: string = 'No data found';
   @Input() message: string = 'No data found';
-  @Input() buttonLabel?: string = 'No data found';
+  @Input() buttonLabel?: string;
   @Output() buttonClick: EventEmitter<void> = new EventEmitter<void>();
 }
