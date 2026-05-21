@@ -1,20 +1,20 @@
 <div class="tb-container">
-	<h1>Viagens</h1>
 	<ng-container *ngIf="loading; else loaded">
 		<ion-spinner></ion-spinner>
 	</ng-container>
 
 	<ng-template #loaded>
-		<ion-card *ngFor="let trip of tripsList" (click)="openTrip(trip)">
-			<ion-card-header>
-				<ion-card-title>{{ trip.name }}</ion-card-title>
-				<ion-card-subtitle>{{ trip.start_date }} - {{ trip.end_date }}</ion-card-subtitle>
-			</ion-card-header>
+		<div class="tb-card w-shadow tb-trip-card" *ngFor="let trip of tripsList" (click)="openTrip(trip)">
+			<div>
+				<h3 class="tb-text">{{ trip.name }}</h3>
+				<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date: 'longDate' }}</p>
+			</div>
 
-			<ion-card-content>
-				<p>{{ (trip.total_budget | currency:'R$ ') || "Not estimated" }}</p>
-			</ion-card-content>
-		</ion-card>
+			<div class="budget-overview d-flex align-center justify-between">
+				<span class="view-total side__budget">{{ (trip.total_budget | currency:'$') }}</span>
+				<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
+			</div>
+		</div>
 
 		<ion-fab horizontal="end" vertical="bottom" slot="fixed">
 			<ion-fab-button (click)="createTrip()">

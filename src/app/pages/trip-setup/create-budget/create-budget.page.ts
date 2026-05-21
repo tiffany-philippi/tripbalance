@@ -12,7 +12,7 @@ import { CategorySummary } from 'src/app/models/trip.model';
 @Component({
 	selector: 'app-create-budget',
 	templateUrl: './create-budget.page.html',
-	styleUrls: ['./create-budget.page.scss'],
+	styleUrls: ['./create-budget.page.scss', '../trip-setup.scss'],
 	imports: [CommonModule, IonicModule, ReactiveFormsModule],
 })
 export class CreateBudgetPage {
@@ -40,11 +40,10 @@ export class CreateBudgetPage {
 	}
 
 	async loadCategories() {
-		console.log(this.tripId)
 		const { data, error } = await this.categoriesService.getCategories(this.tripId);
 
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('There was an error loading categories');
 			console.error('Error loading categories', error);
 			return;
 		}
@@ -84,7 +83,7 @@ export class CreateBudgetPage {
 		this.loadingSubmit = false;
 
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('Oops, something went wrong. Try again.');
 			console.error('Error saving budget', error);
 			return;
 		}

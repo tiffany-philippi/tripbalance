@@ -35,7 +35,7 @@ export class CreateExpensePage implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.trip_id = params.get('id');
       this.loadCategories();
-      this.headerService.setHeader('Nova Despesa', true);
+      this.headerService.setHeader('New Expense', true);
     });
   }
 
@@ -63,14 +63,14 @@ export class CreateExpensePage implements OnInit {
     if (data) this.categories = data as any
 
     if (error) {
-      await this.toastService.error('Ocorreu um erro ao carregar categorias');
+      await this.toastService.error('There was an error loading categories');
       console.error('Error loading categories', error);
     }
   }
 
   async createExpense() {
     if (this.form.invalid) {
-      this.toastService.warning('Preencha todos os campos');
+      this.toastService.warning('Fill in all fields before continuing');
       return;
     }
 
@@ -81,12 +81,12 @@ export class CreateExpensePage implements OnInit {
 
     if (data) {
       this.form.reset();
-      await this.toastService.success('Despesa criada com sucesso!');
-      this.router.navigate([`/trip-details/${this.trip_id}`]);
+      await this.toastService.success('Expense created successfully!');
+      this.router.navigate([`/trip-details/${this.trip_id}`], { replaceUrl: true });
     }
 
     if (error) {
-      await this.toastService.error('Ocorreu um erro ao criar despesa');
+      await this.toastService.error('Oops, something went wrong');
       console.error('Error: Create Expense - Submit form', error)
     }
   }

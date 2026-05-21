@@ -48,7 +48,7 @@ export class TripDetailsPage {
 		this.route.paramMap.subscribe(async params => {
 			this.tripId = params.get('id') as string;
 			await this.loadTrip();
-			this.headerService.setHeader(this.trip?.name ?? 'Detalhes', true);
+			this.headerService.setHeader(this.trip?.name ?? 'Details', true);
 			this.loading = false;
 		});
 	}
@@ -65,12 +65,16 @@ export class TripDetailsPage {
 
 		if (data) this.trip = data as Trip;
 		if (error) {
-			await this.toastService.error('Erro ao carregar viagem');
+			await this.toastService.error('There was an error loading trip');
 			console.error('Error loading trip', error);
 		}
 	}
 
 	addExpense() {
 		this.router.navigate([`trip-details/${this.tripId}/expense`])
+	}
+
+	setupBudget(tripId: string) {
+		this.router.navigate([`trip-setup/${tripId}/categories`])
 	}
 }

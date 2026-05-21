@@ -46,6 +46,7 @@ const routes: Routes = [
 	{
 		path: 'trip-details/:id/expense',
 		canActivate: [authGuard],
+		data: {replaceUrl: true},
 		loadComponent: () =>
 			import('./pages/expenses/create-expense/create-expense.page').then(m => m.CreateExpensePage)
 	},

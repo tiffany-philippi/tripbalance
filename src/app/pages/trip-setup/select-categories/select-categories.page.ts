@@ -9,7 +9,7 @@ import { ToastService } from 'src/app/core/services/toast';
 @Component({
 	selector: 'app-select-categories',
 	templateUrl: './select-categories.page.html',
-	styleUrls: ['./select-categories.page.scss'],
+	styleUrls: ['./select-categories.page.scss', '../trip-setup.scss'],
 	imports: [CommonModule, IonicModule],
 })
 export class SelectCategoriesPage implements OnInit {
@@ -44,7 +44,7 @@ export class SelectCategoriesPage implements OnInit {
 
 		if (data) this.defaultCategories = data as any;
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('There was an error loading categories');
 			console.error('Error loading categories', error);
 		}
 	}
@@ -75,7 +75,7 @@ export class SelectCategoriesPage implements OnInit {
 		this.loadingSubmit = false;
 
 		if (error) {
-			await this.toastService.error('Oops, something went wrong');
+			await this.toastService.error('Oops, something went wrong. Try again.');
 			return;
 		}
 

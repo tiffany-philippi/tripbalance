@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TripsService } from 'src/app/core/services/trips';
+import { Trip } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-trip-budget-overview',
@@ -10,11 +11,10 @@ import { TripsService } from 'src/app/core/services/trips';
   imports: [IonicModule, CommonModule],
 })
 export class TripBudgetOverviewComponent implements OnInit {
-  @Input({ required: true }) tripId!: string | null;
+  @Input({ required: true }) trip!: Trip;
 
   loading: boolean = true;
   hasError: boolean = false;
-  trip: any = {};
 
   constructor(
     private tripsService: TripsService,
@@ -25,7 +25,7 @@ export class TripBudgetOverviewComponent implements OnInit {
   }
 
   async loadData() {
-    const { data, error } = await this.tripsService.getTrip(this.tripId!);
+    const { data, error } = await this.tripsService.getTrip(this.trip.id!);
 
     this.loading = false;
     this.trip = data;

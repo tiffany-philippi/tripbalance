@@ -2,19 +2,29 @@
 
 <ng-template #loaded>
   <div class="tb-trip-details tb-container">
-    <h2>Detalhes da viagem</h2>
-    <app-trip-budget-overview [tripId]="tripId"></app-trip-budget-overview>
+    <ng-container *ngIf="trip.total_budget && trip.total_budget > 0; else noBudget">
+      <app-trip-budget-overview [trip]="trip"></app-trip-budget-overview>
 
-    <h2>Categorias</h2>
-    <app-budget-category-card [tripId]="tripId"></app-budget-category-card>
+      <h2>Categories</h2>
+      <app-budget-category-card [tripId]="tripId"></app-budget-category-card>
 
-    <h2>Expenses</h2>
-    <app-expenses-list [tripId]="tripId"></app-expenses-list>
+      <h2>Expenses</h2>
+      <app-expenses-list [tripId]="tripId"></app-expenses-list>
 
-    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-      <ion-fab-button (click)="addExpense()">
-        <ion-icon name="receipt"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+      <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button (click)="addExpense()">
+          <ion-icon name="receipt"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ng-container>
+
+    <ng-template #noBudget>
+      <div class="tb-empty-state">
+        <ion-icon name="map-outline"></ion-icon>
+        <h3>Your trip is ready!</h3>
+        <p>Set up your budget to start tracking.</p>
+        <ion-button (click)="setupBudget(trip.id)">Set up budget</ion-button>
+      </div>
+    </ng-template>
   </div>
 </ng-template>

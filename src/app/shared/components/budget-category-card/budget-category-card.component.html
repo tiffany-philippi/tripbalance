@@ -1,5 +1,5 @@
 <div class="d-flex row-wrap" *ngIf="categories && categories.length > 0 && !loading; else noCategories">
-  <div class="tb-card w-shadow category-card align-center" *ngFor="let ctg of categories" (click)="openCategory(ctg)">
+  <div class="tb-card w-shadow category-card align-center" *ngFor="let ctg of categories" (click)="openCategorySelectionPage()">
 
     <div class="category-icon" [ngClass]="ctg.color_key">
       <ion-icon [ngClass]="ctg.color_key" [name]="ctg.icon"></ion-icon>
@@ -15,7 +15,7 @@
           <ion-icon *ngIf="!isMoreThanZero(ctg.planned - ctg.spent)" name="arrow-down-outline"></ion-icon>
         </ng-container>
 
-        <p class="text-12 budget-savings-overview">{{ (ctg.planned - ctg.spent) | currency:'R$ ' }}
+        <p class="text-12 budget-savings-overview">{{ (ctg.planned - ctg.spent) | currency:'$' }}
         </p>
       </div>
     </div>

@@ -10,7 +10,7 @@ import { TripsService } from 'src/app/core/services/trips';
 @Component({
   selector: 'app-create-trip',
   templateUrl: './create-trip.page.html',
-  styleUrls: ['./create-trip.page.scss'],
+  styleUrls: ['./create-trip.page.scss', '../trip-setup.scss'],
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class CreateTripPage implements OnInit {

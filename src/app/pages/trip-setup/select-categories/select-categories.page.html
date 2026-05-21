@@ -1,4 +1,10 @@
 <div class="tb-checkbox-list">
+	<div class="tb-steps">
+		<span></span>
+		<span class="active"></span>
+		<span></span>
+	</div>
+
 	<div *ngFor="let category of defaultCategories" class="tb-category-item" [class.selected]="isSelected(category.id)"
 		(click)="toggleCategory(category.id)">
 

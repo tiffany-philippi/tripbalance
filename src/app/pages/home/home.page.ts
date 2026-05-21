@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   ) { }
 
   ionViewWillEnter() {
-    this.headerService.setHeader('Minhas Viagens', false);
+    this.headerService.setHeader('My Trips', false);
   }
 
   async ngOnInit() {
@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
     
     if (data) this.tripsList = data;
     if (error) {
-      await this.toastService.error('Erro ao carregar viagens');
+      await this.toastService.error('There was an error loading trips');
       console.error('Error loading trips', error);
     }
   }
