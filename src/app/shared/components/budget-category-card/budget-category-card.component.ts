@@ -44,8 +44,4 @@ export class BudgetCategoryCardComponent implements OnInit {
   isMoreThanZero(value: number): boolean {
     return this.tripsService.isMoreThanZero(value);
   }
-
-  openCategorySelectionPage() {
-    this.router.navigate([`trip-setup/${this.tripId!}/categories`])
-  }
 }

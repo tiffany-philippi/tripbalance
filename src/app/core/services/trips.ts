@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base';
-import { Trip } from 'src/app/models/trip.model'
+import { CreateTrip, TripView } from 'src/app/models/trip.model'
 import { SupabaseService } from './supabase';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class TripsService extends BaseService<Trip> {
+export class TripsService extends BaseService<TripView> {
 
 	constructor(supabase: SupabaseService) {
 		super(supabase, 'trips') 
@@ -16,6 +16,7 @@ export class TripsService extends BaseService<Trip> {
 		return this.supabaseService.supabase
 			.from('trip_summary')
 			.select('*')
+			.eq('status', 'active')
 			.order('start_date', { ascending: false })
 	}
 
@@ -27,11 +28,25 @@ export class TripsService extends BaseService<Trip> {
 			.single();
 	}
 
-	async createTrip(trip: Trip) {
+	async createTrip(trip: CreateTrip) {
 		return this.supabaseService.supabase
 			.from('trips')
 			.insert(trip)
 			.select();
+	}
+
+	async activateTrip(tripId: string) {
+		return this.supabaseService.supabase
+			.from('trips')
+			.update({ status: 'active' })
+			.eq('id', tripId);
+	}
+
+	async deleteTrip(tripId: string) {
+		return this.supabaseService.supabase
+			.from('trips')
+			.delete()
+			.eq('id', tripId);
 	}
 
 	getSavingsClass(planned: number, spent: number) {

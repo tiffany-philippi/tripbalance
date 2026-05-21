@@ -7,9 +7,10 @@ import { TripsService } from 'src/app/core/services/trips';
 import { TripBudgetOverviewComponent } from 'src/app/shared/components/trip-budget-overview/trip-budget-overview.component';
 import { BudgetCategoryCardComponent } from "src/app/shared/components/budget-category-card/budget-category-card.component";
 import { ExpensesListComponent } from 'src/app/shared/components/expenses-list/expenses-list.component';
-import { CategorySummary, ExpenseItem, Trip } from 'src/app/models/trip.model';
+import { CategorySummary, ExpenseItem, TripView } from 'src/app/models/trip.model';
 import { ToastService } from 'src/app/core/services/toast';
 import { ViewChild } from '@angular/core';
+import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
 
 
 @Component({
@@ -22,6 +23,7 @@ import { ViewChild } from '@angular/core';
 		TripBudgetOverviewComponent,
 		BudgetCategoryCardComponent,
 		ExpensesListComponent,
+		EmptyStateComponent,
 	],
 })
 export class TripDetailsPage {
@@ -31,11 +33,25 @@ export class TripDetailsPage {
 
 	headerService = inject(HeaderService);
 	tripId!: string;
-	trip!: Trip;
+	trip!: TripView;
 	categories: CategorySummary[] = [];
 	expenses: ExpenseItem[] = [];
 
 	loading: boolean = true;
+
+	public alertButtons = [
+		{
+			text: 'Cancel',
+			role: 'cancel',
+		},
+		{
+			text: 'Delete',
+			role: 'confirm',
+			handler: () => {
+				this.deleteTrip(this.tripId);
+			},
+		},
+	];
 
 	constructor(
 		private route: ActivatedRoute,
@@ -63,7 +79,7 @@ export class TripDetailsPage {
 	async loadTrip() {
 		const { data, error } = await this.tripsService.getTrip(this.tripId);
 
-		if (data) this.trip = data as Trip;
+		if (data) this.trip = data as TripView;
 		if (error) {
 			await this.toastService.error('There was an error loading trip');
 			console.error('Error loading trip', error);
@@ -76,5 +92,18 @@ export class TripDetailsPage {
 
 	setupBudget(tripId: string) {
 		this.router.navigate([`trip-setup/${tripId}/categories`])
+	}
+
+	async deleteTrip(id: string) {
+		const { error } = await this.tripsService.deleteTrip(id);
+
+		if (error) {
+			await this.toastService.error('Error deleting trip. Try again.');
+			console.error('Error deleting trip', error);
+			return;
+		}
+
+		await this.toastService.success('Trip deleted successfully!');
+		this.router.navigate(['/home'], { replaceUrl: true });
 	}
 }
