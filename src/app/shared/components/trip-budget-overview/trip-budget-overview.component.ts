@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TripsService } from 'src/app/core/services/trips';
-import { Trip } from 'src/app/models/trip.model';
+import { TripView } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-trip-budget-overview',
@@ -11,7 +11,7 @@ import { Trip } from 'src/app/models/trip.model';
   imports: [IonicModule, CommonModule],
 })
 export class TripBudgetOverviewComponent implements OnInit {
-  @Input({ required: true }) trip!: Trip;
+  @Input({ required: true }) trip!: TripView;
 
   loading: boolean = true;
   hasError: boolean = false;

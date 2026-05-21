@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { AuthService } from 'src/app/core/services/auth';
 import { HeaderService } from 'src/app/core/services/header';
 import { ToastService } from 'src/app/core/services/toast';
 import { TripsService } from 'src/app/core/services/trips';
@@ -21,6 +22,7 @@ export class CreateTripPage implements OnInit {
   constructor(
     private headerService: HeaderService,
     private tripsService: TripsService,
+    private authService: AuthService,
     private toastService: ToastService,
     private router: Router,
   ) { }
@@ -46,13 +48,16 @@ export class CreateTripPage implements OnInit {
 
     this.loadingSubmit = true;
 
-    const { data, error } = await this.tripsService.createTrip({...this.form.value});
+    const { data, error } = await this.tripsService.createTrip({
+      ...this.form.value,
+      status: 'draft',
+      created_by: (await this.authService.getSession()).data.session?.user.id
+    });
 
     this.loadingSubmit = false;
 
     if (data) {
       this.form.reset();
-      await this.toastService.success('Trip created successfully!');
       this.router.navigate([`/trip-setup/${data[0].id}/categories`]);
     }
 

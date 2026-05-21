@@ -1,10 +1,20 @@
-export interface Trip {
+export interface TripView {
     id: string;
     name: string;
     start_date: string;
     end_date: string;
     total_spent: number;
     total_budget: number;
+    status: string;
+    created_by: string;
+}
+
+export interface CreateTrip {
+    name: string;
+    start_date: string;
+    end_date: string;
+    status?: string;
+    created_by?: string;
 }
 
 export interface TripBalance {

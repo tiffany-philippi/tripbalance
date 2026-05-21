@@ -1,21 +1,26 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { IonicModule } from '@ionic/angular'
 import { HeaderService } from 'src/app/core/services/header'
 import { ToastService } from 'src/app/core/services/toast'
 import { TripsService } from 'src/app/core/services/trips'
-import { Trip } from 'src/app/models/trip.model'
+import { TripView } from 'src/app/models/trip.model'
+import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
-  imports: [CommonModule, IonicModule],
+  imports: [
+    CommonModule, 
+    IonicModule,
+    EmptyStateComponent,
+  ],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
-  tripsList: Trip[] = []
+  tripsList: TripView[] = []
   loading: boolean = true
 
   constructor(
@@ -25,11 +30,8 @@ export class HomePage implements OnInit {
     private headerService: HeaderService,
   ) { }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.headerService.setHeader('My Trips', false);
-  }
-
-  async ngOnInit() {
     await this.loadTrips()
   }
 
@@ -44,7 +46,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  openTrip(trip: Trip) {
+  openTrip(trip: TripView) {
     this.router.navigate(['/trip-details', trip.id]);
   }
 

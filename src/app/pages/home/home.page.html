@@ -1,25 +1,38 @@
 <div class="tb-container">
-	<ng-container *ngIf="loading; else loaded">
-		<ion-spinner></ion-spinner>
-	</ng-container>
+	<div class="tb-loading lg" *ngIf="loading; else loaded">
+		<ion-spinner name="bubbles"></ion-spinner>
+	</div>
 
 	<ng-template #loaded>
-		<div class="tb-card w-shadow tb-trip-card" *ngFor="let trip of tripsList" (click)="openTrip(trip)">
-			<div>
-				<h3 class="tb-text">{{ trip.name }}</h3>
-				<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date: 'longDate' }}</p>
-			</div>
+		<ng-container *ngIf="tripsList && tripsList.length > 0; else noTrips">
+			<div class="tb-card w-shadow tb-trip-card" *ngFor="let trip of tripsList" (click)="openTrip(trip)">
+				<div>
+					<h3 class="tb-text">{{ trip.name }}</h3>
+					<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date:
+						'longDate' }}</p>
+				</div>
 
-			<div class="budget-overview d-flex align-center justify-between">
-				<span class="view-total side__budget">{{ (trip.total_budget | currency:'$') }}</span>
-				<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
+				<div class="budget-overview d-flex align-center justify-between">
+					<span class="view-total side__budget">{{ (trip.total_budget | currency:'$') }}</span>
+					<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
+				</div>
 			</div>
-		</div>
+			
+			<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+				<ion-fab-button (click)="createTrip()">
+					<ion-icon name="add"></ion-icon>
+				</ion-fab-button>
+			</ion-fab>
+		</ng-container>
 
-		<ion-fab horizontal="end" vertical="bottom" slot="fixed">
-			<ion-fab-button (click)="createTrip()">
-				<ion-icon name="add"></ion-icon>
-			</ion-fab-button>
-		</ion-fab>
+		<ng-template #noTrips>
+			<app-empty-state 
+				icon="airplane-outline" 
+				title="No trips yet!"
+				message="Start planning your next adventure."
+				buttonLabel="Create a trip"
+				(buttonClick)="createTrip()">
+			</app-empty-state>
+		</ng-template>
 	</ng-template>
 </div>

@@ -2,7 +2,7 @@
   <div>
     <!-- @TODO: i18n -->
     <p class="tb-color-subtitle">Summary</p>
-    <ion-spinner *ngIf="loading"></ion-spinner>
+    <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
 
     <ng-container *ngIf="!loading">
       <p class="tb-text text-40 tb-color-primary text-bold">{{ trip.total_spent | currency:'USD' }} <span class="text-12 font-weight-400">spent</span></p>

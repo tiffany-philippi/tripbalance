@@ -7,6 +7,7 @@ import { BudgetService } from 'src/app/core/services/budget';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { HeaderService } from 'src/app/core/services/header';
 import { ToastService } from 'src/app/core/services/toast';
+import { TripsService } from 'src/app/core/services/trips';
 import { CategorySummary } from 'src/app/models/trip.model';
 
 @Component({
@@ -21,11 +22,13 @@ export class CreateBudgetPage {
 	tripId!: string;
 	loadingData: boolean = true;
 	loadingSubmit: boolean = false;
+	isEditMode: boolean = false;
 
 	constructor(
 		private headerService: HeaderService,
 		private categoriesService: CategoriesService,
 		private budgetService: BudgetService,
+		private tripsService: TripsService,
 		private toastService: ToastService,
 		private route: ActivatedRoute,
 		private router: Router,
@@ -36,6 +39,10 @@ export class CreateBudgetPage {
 		this.route.paramMap.subscribe(async params => {
 			this.tripId = params.get('id') as string;
 			this.loadCategories();
+		});
+
+		this.route.queryParamMap.subscribe(params => {
+			this.isEditMode = params.get('mode') === 'edit';
 		});
 	}
 
@@ -86,6 +93,16 @@ export class CreateBudgetPage {
 			await this.toastService.error('Oops, something went wrong. Try again.');
 			console.error('Error saving budget', error);
 			return;
+		}
+
+		if (!this.isEditMode) {
+			const { error: activateError } = await this.tripsService.activateTrip(this.tripId);
+
+			if (activateError) {
+				await this.toastService.error('Budget saved, but activating the trip failed. Try again.');
+				console.error('Error activating trip', activateError);
+				return;
+			}
 		}
 
 		await this.toastService.success('Budget saved successfully!');
