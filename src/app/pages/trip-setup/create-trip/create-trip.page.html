@@ -18,8 +18,9 @@
 
 				<ion-modal [keepContentsMounted]="true">
 					<ng-template>
-						<ion-datetime presentation="date" locale="en-ES" formControlName="start_date"
-							id="startdate"></ion-datetime>
+						<ion-datetime presentation="date" locale="en-US" formControlName="start_date" id="startdate"
+							(ionChange)="onStartDateChange($event)">
+						</ion-datetime>
 					</ng-template>
 				</ion-modal>
 			</div>
@@ -30,8 +31,9 @@
 
 				<ion-modal [keepContentsMounted]="true">
 					<ng-template>
-						<ion-datetime presentation="date" locale="en-ES" formControlName="end_date"
-							id="enddate"></ion-datetime>
+						<ion-datetime presentation="date" locale="en-US" formControlName="end_date" id="enddate"
+							[min]="minEndDate">
+						</ion-datetime>
 					</ng-template>
 				</ion-modal>
 			</div>
