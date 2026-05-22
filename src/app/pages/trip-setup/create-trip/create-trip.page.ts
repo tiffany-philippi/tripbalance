@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/core/services/auth';
 import { HeaderService } from 'src/app/core/services/header';
@@ -18,6 +18,7 @@ export class CreateTripPage implements OnInit {
   form: FormGroup = new FormGroup({});
   loading: boolean = true;
   loadingSubmit: boolean = false;
+  minEndDate: string = new Date().toISOString();
 
   constructor(
     private headerService: HeaderService,
@@ -64,6 +65,16 @@ export class CreateTripPage implements OnInit {
     if (error) {
       await this.toastService.error('A error occurred while creating trip. Try again.');
       console.error('Error: Create Trip - Submit form', error)
+    }
+  }
+
+  onStartDateChange(event: any) {
+    const selectedDate = event.detail.value;
+    this.minEndDate = selectedDate;
+
+    const endDate = this.form.get('end_date')?.value;
+    if (endDate && endDate < selectedDate) {
+      this.form.get('end_date')?.setValue(selectedDate);
     }
   }
 
