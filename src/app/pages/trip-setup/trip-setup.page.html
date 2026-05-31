@@ -1,0 +1,17 @@
+<div class="tb-container" [class.no-bg]="currentStep !== 1">
+    <div class="tb-steps">
+        <span [class.active]="currentStep === 1"></span>
+        <span [class.active]="currentStep === 2"></span>
+        <span [class.active]="currentStep === 3"></span>
+    </div>
+
+    <app-step-trip-info *ngIf="currentStep === 1" (next)="next($event)" (cancel)="cancel()">
+    </app-step-trip-info>
+
+    <app-step-categories *ngIf="currentStep === 2" (next)="next($event)" (prev)="previous()">
+    </app-step-categories>
+
+    <app-step-budget *ngIf="currentStep === 3" [selectedCategories]="selectedCategories"
+        [loadingSubmit]="loadingSubmit" (next)="next($event)" (prev)="previous()">
+    </app-step-budget>
+</div>

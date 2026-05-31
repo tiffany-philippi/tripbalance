@@ -1,38 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
-import { HeaderService } from 'src/app/core/services/header';
 import { ToastService } from 'src/app/core/services/toast';
+import { TripCategory } from 'src/app/models/trip.model';
 
 @Component({
-	selector: 'app-select-categories',
+	selector: 'app-step-categories',
 	templateUrl: './select-categories.page.html',
-	styleUrls: ['./select-categories.page.scss', '../trip-setup.scss'],
+	styleUrls: ['./select-categories.page.scss', '../trip-setup.page.scss'],
 	imports: [CommonModule, IonicModule],
 })
 export class SelectCategoriesPage implements OnInit {
+	@Output() next = new EventEmitter<TripCategory[]>();
+	@Output() prev = new EventEmitter<void>();
+
 	defaultCategories: any[] = [];
 	selectedIds: string[] = [];
 	loadingCategories: boolean = true;
-	loadingSubmit: boolean = false;
-	tripId!: string;
 
 	constructor(
-		private headerService: HeaderService,
 		private categoriesService: CategoriesService,
 		private toastService: ToastService,
-		private route: ActivatedRoute,
-		private router: Router,
 	) { }
-
-	async ionViewWillEnter() {
-		this.headerService.setHeader('Trip Categories', true);
-		this.route.paramMap.subscribe(params => {
-			this.tripId = params.get('id') as string;
-		});
-	}
 
 	ngOnInit() {
 		this.loadDefaultCategories();
@@ -54,31 +44,14 @@ export class SelectCategoriesPage implements OnInit {
 	}
 
 	toggleCategory(id: string) {
-		if (this.isSelected(id))
+		if (this.isSelected(id)) {
 			this.selectedIds = this.selectedIds.filter(s => s !== id);
-		else this.selectedIds.push(id);
+		
+		} else this.selectedIds.push(id);
 	}
 
-	async confirm() {
-		if (this.selectedIds.length === 0) {
-			await this.toastService.warning('Select at least one category');
-			return;
-		}
-
-		this.loadingSubmit = true;
-
-		const { error } = await this.categoriesService.createTripCategories(
-			this.tripId,
-			this.selectedIds
-		);
-
-		this.loadingSubmit = false;
-
-		if (error) {
-			await this.toastService.error('Oops, something went wrong. Try again.');
-			return;
-		}
-
-		this.router.navigate([`/trip-setup/${this.tripId}/budget`]);
+	submit() {
+		const selected = this.defaultCategories.filter(c => this.selectedIds.includes(c.id));
+		this.next.emit(selected); 
 	}
 }

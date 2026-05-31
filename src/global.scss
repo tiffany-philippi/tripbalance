@@ -207,3 +207,12 @@ ion-datetime-button::part(native) {
         justify-content: center;
     }
 }
+
+.tb-footer {
+    padding: 16px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--ion-background-color);
+}

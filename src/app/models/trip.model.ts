@@ -24,7 +24,16 @@ export interface TripBalance {
     balance: number;
 }
 
-export interface CategorySummary {
+export interface Category {
+    id: string;
+    name: string;
+    icon: string;
+    color_key: string;
+    is_default: boolean;
+    user_id: string | null;
+}
+
+export interface CategorySummaryView {
     category_id: string;
     category_name: string;
     color_key: string;

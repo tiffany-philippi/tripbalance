@@ -7,7 +7,7 @@ import { CategoriesService } from 'src/app/core/services/categories';
 import { ExpensesService } from 'src/app/core/services/expenses';
 import { HeaderService } from 'src/app/core/services/header';
 import { ToastService } from 'src/app/core/services/toast';
-import { CategorySummary } from 'src/app/models/trip.model';
+import { CategorySummaryView } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-create-expense',
@@ -17,7 +17,7 @@ import { CategorySummary } from 'src/app/models/trip.model';
 })
 export class CreateExpensePage implements OnInit {
   form: FormGroup = new FormGroup({});
-  categories: CategorySummary[] = [];
+  categories: CategorySummaryView[] = [];
   trip_id: string | null = '';
   loadingSubmit = false;
   loadingData = true;
