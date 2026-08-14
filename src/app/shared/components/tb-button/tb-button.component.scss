@@ -1,0 +1,35 @@
+.manaree-button {
+    width: 100%;
+    height: 70px;
+    border-radius: var(--tb-border-radius-sm) !important;
+    font-weight: 600;
+    font-size: 20px;
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contrast);
+    text-transform: none;
+
+    &.primary-sm {
+        height: 40px;
+        font-size: 16px;
+    }
+
+    &.secondary {
+        --background: var(--ion-color-secondary);
+        --color: var(--ion-color-secondary-contrast);
+    }
+
+    &.clear {
+        --background: transparent;
+        --color: var(--ion-color-secondary);
+        text-transform: uppercase;
+    }
+
+    &.disabled {
+        --background: var(--ion-color-light-shade);
+        --color: var(--ion-text-subtitle-color);
+    }
+
+    &.iconButton {
+        text-transform: uppercase;
+    }
+}

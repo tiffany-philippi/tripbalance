@@ -1,0 +1,10 @@
+<ion-button class="manaree-button" expand="block" [fill]="fill" [ngClass]="[
+    type, 
+    disabled ? 'disabled' : '', 
+    hasIcon ? 'iconButton' : '']
+    " (click)="clicked()" [disabled]="disabled">
+  @if (hasIcon) {
+  <ion-icon slot="end" [name]="icon"></ion-icon>
+  }
+  {{ label }}
+</ion-button>

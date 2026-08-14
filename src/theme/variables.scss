@@ -1,18 +1,112 @@
 :root {
-    /** Ionic CSS Variables **/
-    --ion-text-color: #1C1C1C;
-    --ion-text-subtitle-color: #6E6E6E;
-    --ion-border-color: #D9D9D9;
-    --ion-text-placeholder-color: #B3B3B3;
-    --ion-color-primary: var(--tb-primary);
-    --ion-color-secondary: var(--tb-secondary);
-    --ion-color-success: var(--tb-success);
-    --ion-color-error: var(--tb-error);
 
-    /** App Colors **/
-    --tb-primary: #4D8DFF;
-    --tb-secondary: #FF9F43;
-    --tb-success: #22C55E;
-    --tb-error: #FF4D4D;
-    
+    // ============================================
+    // App Colors — TripBalance Design Tokens
+    // ============================================
+
+    --tb-primary: #A86B6B;
+    --tb-primary-200: #C49A9A;
+    --tb-primary-100: #EDD9D9;
+
+    --tb-secondary: #F9BC53;
+    --tb-secondary-200: #FBD08A;
+    --tb-secondary-100: #FEF0CC;
+
+    --tb-success: #4CAF7D;
+    --tb-error: #E05C5C;
+    --tb-warning: #F0A030;
+
+    --tb-background: #FAF7F7;
+    --tb-surface: #FFFFFF;
+
+    --tb-border-radius-xs: 8px;
+    --tb-border-radius-sm: 12px;
+    --tb-border-radius-md: 16px;
+    --tb-border-radius-lg: 24px;
+    --tb-border-radius-xl: 30px;
+
+    --tb-shadow-sm: 0 1px 4px rgba(168, 107, 107, 0.08);
+    --tb-shadow-md: 0 4px 12px rgba(168, 107, 107, 0.12);
+    --tb-shadow-lg: 0 8px 24px rgba(168, 107, 107, 0.16);
+
+    // Category Colors
+    --tb-cat-yellow-bg: #FEFCE8;
+    --tb-cat-yellow-icon: #FACC15;
+    --tb-cat-blue-bg: #E6EDFA;
+    --tb-cat-blue-icon: #4D8DFF;
+    --tb-cat-green-bg: #EBFFF5;
+    --tb-cat-green-icon: #22C55E;
+    --tb-cat-red-bg: #F3D5D5;
+    --tb-cat-red-icon: #EF4444;
+    --tb-cat-purple-bg: #ECE8FF;
+    --tb-cat-purple-icon: #8B5CF6;
+    --tb-cat-orange-bg: #FFF3E8;
+    --tb-cat-orange-icon: #FF9F43;
+    --tb-cat-cyan-bg: #E0F7FA;
+    --tb-cat-cyan-icon: #00BCD4;
+    --tb-cat-pink-bg: #FCE4EC;
+    --tb-cat-pink-icon: #E91E63;
+    --tb-cat-gray-bg: #F5F5F5;
+    --tb-cat-gray-icon: #9E9E9E;
+
+    // ============================================
+    // Ionic CSS Variables
+    // ============================================
+
+    --ion-background-color: var(--tb-background);
+    --ion-background-color-rgb: 250, 247, 247;
+
+    --ion-text-color: #2C2424;
+    --ion-text-color-rgb: 44, 36, 36;
+    --ion-text-subtitle-color: #7A6060;
+    --ion-text-placeholder-color: #B89898;
+    --ion-border-color: #E8DADA;
+
+    --ion-color-primary: var(--tb-primary);
+    --ion-color-primary-rgb: 168, 107, 107;
+    --ion-color-primary-contrast: #FFFFFF;
+    --ion-color-primary-shade: #945E5E;
+    --ion-color-primary-tint: #B87878;
+
+    --ion-color-secondary: var(--tb-secondary);
+    --ion-color-secondary-rgb: 249, 188, 83;
+    --ion-color-secondary-contrast: #2C2424;
+    --ion-color-secondary-shade: #DBA748;
+    --ion-color-secondary-tint: #FAC364;
+
+    --ion-color-success: var(--tb-success);
+    --ion-color-success-rgb: 76, 175, 125;
+    --ion-color-success-contrast: #FFFFFF;
+    --ion-color-success-shade: #439A6E;
+    --ion-color-success-tint: #5EB785;
+
+    --ion-color-warning: var(--tb-warning);
+    --ion-color-warning-rgb: 240, 160, 48;
+    --ion-color-warning-contrast: #FFFFFF;
+    --ion-color-warning-shade: #D48E2A;
+    --ion-color-warning-tint: #F2AA43;
+
+    --ion-color-danger: var(--tb-error);
+    --ion-color-danger-rgb: 224, 92, 92;
+    --ion-color-danger-contrast: #FFFFFF;
+    --ion-color-danger-shade: #C55151;
+    --ion-color-danger-tint: #E36C6C;
+
+    --ion-color-medium: #7A6060;
+    --ion-color-medium-rgb: 122, 96, 96;
+    --ion-color-medium-contrast: #FFFFFF;
+    --ion-color-medium-shade: #6B5454;
+    --ion-color-medium-tint: #877070;
+
+    --ion-color-light: #EDD9D9;
+    --ion-color-light-rgb: 237, 217, 217;
+    --ion-color-light-contrast: #2C2424;
+    --ion-color-light-shade: #D1C1C1;
+    --ion-color-light-tint: #F0DDDD;
+
+    --ion-font-family: system-ui, -apple-system, sans-serif;
+    --ion-item-background: var(--tb-surface);
+    --ion-card-background: var(--tb-surface);
+    --ion-toolbar-background: var(--tb-primary);
+    --ion-toolbar-color: #FFFFFF;
 }
