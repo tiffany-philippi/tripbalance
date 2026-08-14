@@ -5,13 +5,13 @@
         <span [class.active]="currentStep === 3"></span>
     </div>
 
-    <app-step-trip-info *ngIf="currentStep === 1" (next)="next($event)" (cancel)="cancel()">
+    <app-step-trip-info *ngIf="currentStep === 1" [data]="tripInfo" (next)="next($event)" (cancel)="cancel()">
     </app-step-trip-info>
 
-    <app-step-categories *ngIf="currentStep === 2" (next)="next($event)" (prev)="previous()">
+    <app-step-categories *ngIf="currentStep === 2" [data]="selectedCategories" (next)="next($event)" (prev)="previous()">
     </app-step-categories>
 
-    <app-step-budget *ngIf="currentStep === 3" [selectedCategories]="selectedCategories"
+    <app-step-budget *ngIf="currentStep === 3" [data]="budgetSetup" [selectedCategories]="selectedCategories"
         [loadingSubmit]="loadingSubmit" (next)="next($event)" (prev)="previous()">
     </app-step-budget>
 </div>

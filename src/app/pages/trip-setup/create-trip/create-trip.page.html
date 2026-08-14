@@ -37,8 +37,8 @@
 </div>
 
 <div class="tb-footer">
-	<ion-button fill="clear" class="w-100" (click)="cancel.emit()">
+	<ion-button [disabled]="form.invalid" class="w-100 tb-primary-button" (click)="submit()">Next</ion-button>
+	<ion-button fill="clear" class="w-100 tb-text-danger" (click)="cancel.emit()">
 		Cancel
 	</ion-button>
-	<ion-button [disabled]="form.invalid" class="w-100 tb-primary-button" (click)="submit()">Next</ion-button>
 </div>

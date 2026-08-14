@@ -13,10 +13,10 @@
 </div>
 
 <div class="tb-footer">
-  <ion-button fill="clear" class="w-100" (click)="prev.emit()">
-    Back
-  </ion-button>
   <ion-button class="w-100 tb-primary-button" [disabled]="loadingSubmit" (click)="submit()" type="button">
     Create Trip
+  </ion-button>
+  <ion-button fill="clear" class="w-100 tb-text-danger" (click)="prev.emit()">
+    Back
   </ion-button>
 </div>

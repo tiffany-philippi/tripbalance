@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
@@ -12,15 +12,16 @@ import { IonicModule } from '@ionic/angular';
 export class CreateTripPage implements OnInit {
   @Output() next = new EventEmitter<any>();
   @Output() cancel = new EventEmitter<any>();
+  @Input() data?: any;
 
   form: FormGroup = new FormGroup({});
   minEndDate: string = new Date().toISOString();
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      start_date: new FormControl(new Date().toISOString()),
-      end_date: new FormControl(new Date().toISOString()),
+      name: new FormControl(this.data ? this.data.name : '', Validators.required),
+      start_date: new FormControl(this.data ? this.data.start_date : new Date().toISOString()),
+      end_date: new FormControl(this.data ? this.data.end_date : new Date().toISOString()),
     });
   }
 

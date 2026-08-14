@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
 import { ToastService } from 'src/app/core/services/toast';
-import { TripCategory } from 'src/app/models/trip.model';
+import { TripCategory, Category } from 'src/app/models/trip.model';
 
 @Component({
 	selector: 'app-step-categories',
@@ -14,6 +14,8 @@ import { TripCategory } from 'src/app/models/trip.model';
 export class SelectCategoriesPage implements OnInit {
 	@Output() next = new EventEmitter<TripCategory[]>();
 	@Output() prev = new EventEmitter<void>();
+	@Output() save = new EventEmitter<TripCategory[]>();
+	@Input() data?: Category[];
 
 	defaultCategories: any[] = [];
 	selectedIds: string[] = [];
@@ -24,15 +26,18 @@ export class SelectCategoriesPage implements OnInit {
 		private toastService: ToastService,
 	) { }
 
-	ngOnInit() {
+	ngOnInit() {		
 		this.loadDefaultCategories();
 	}
-
+	
 	async loadDefaultCategories() {
 		const { data, error } = await this.categoriesService.getDefaultCategories();
 		this.loadingCategories = false;
-
-		if (data) this.defaultCategories = data as any;
+		
+		if (data) {
+			this.defaultCategories = data as any;
+			if (this.data) this.selectedIds = this.data.map(c => c.id);
+		}
 		if (error) {
 			await this.toastService.error('There was an error loading categories');
 			console.error('Error loading categories', error);
@@ -47,7 +52,13 @@ export class SelectCategoriesPage implements OnInit {
 		if (this.isSelected(id)) {
 			this.selectedIds = this.selectedIds.filter(s => s !== id);
 		
-		} else this.selectedIds.push(id);
+		} else {
+			this.selectedIds.push(id);
+		}
+	}
+
+	saveData() {
+		this.save.emit(this.defaultCategories.filter(c => this.selectedIds.includes(c.id)));
 	}
 
 	submit() {

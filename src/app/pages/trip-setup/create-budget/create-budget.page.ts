@@ -13,6 +13,7 @@ import { Category } from 'src/app/models/trip.model';
 })
 export class CreateBudgetPage implements OnChanges {
 	@Input({ required: true }) selectedCategories!: Category[];
+	@Input() data?: { category_id: string; planned_amount: number }[];
 	@Input() loadingSubmit = false;
 	@Output() next = new EventEmitter<{ category_id: string; planned_amount: number }[]>();
 	@Output() prev = new EventEmitter<void>();
@@ -28,6 +29,7 @@ export class CreateBudgetPage implements OnChanges {
 	}
 
 	buildForm() {
+		console.log(this.data)
 		const controls: { [key: string]: FormControl } = {};
 		this.selectedCategories.forEach(c => {
 			controls[c.id] = new FormControl(0, Validators.min(0));
