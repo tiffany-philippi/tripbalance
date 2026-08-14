@@ -16,6 +16,9 @@
 
 @import "./theme/variables.scss";
 
+* {
+    font-family: 'Nunito Sans', sans-serif;
+}
 
 .row {
     display: flex;
@@ -86,6 +89,10 @@ p {
     color: var(--ion-text-subtitle-color);
 }
 
+.tb-text-danger {
+    color: var(--ion-color-error);
+}
+
 .text-bold {
     font-weight: bold;
 }
@@ -116,7 +123,7 @@ p {
 
 .tb-container {
     padding: 16px 24px;
-    background-color: #F5F7FA;
+    background-color: var(--tb-background);
     height: 100%;
     overflow: auto;
 
@@ -129,10 +136,20 @@ p {
     display: flex;
     padding: 8px;
     background-color: #fff;
-    border-radius: 8px;
+
+    // @TODO: create class radius for system (global)
+    &.radius-md {
+        border-radius: var(--tb-border-radius-md)
+    }
+    &.radius-xl {
+        border-radius: var(--tb-border-radius-xl)
+    }
 
     &.w-shadow {
         box-shadow: 0 0 14px rgba(204, 204, 204, 0.5);
+    }
+    &.tb-clickable-card {
+        border: 1px solid var(--ion-border-color);
     }
 }
 

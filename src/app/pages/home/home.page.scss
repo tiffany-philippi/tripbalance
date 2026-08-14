@@ -1,27 +1,32 @@
+@import '../../../theme/variables.scss';
+
 .tb-trip-card {
     margin: 16px 0;
-    flex-direction: column;
-    padding: 8px 16px;
+    gap: 24px;
+    padding: 16px;
+    max-height: 200px;
+
+    .trip-picture {
+        
+        ion-img::part(image) {
+            width: 150px;
+            height: 150px;
+            border-radius: var(--tb-border-radius-xl);
+            object-fit: cover;
+        }
+    }
 
     .budget-overview {
-        display: flex;
-        gap: 8px;
-        
-        .view-total {
-            border-radius: 4px;
-            width: 50%;
-            padding: 8px;
-            color: #fff;
-            text-align: center;
-            margin-top: 8px;
-            
-            &.side {
-                &__budget {
-                    background-color: var(--tb-primary);
-                }
-                &__spent {
-                    background-color: var(--tb-secondary);
-                }
+        gap: 16px;
+
+        .footer-label {
+            gap: 32px;
+            display: flex;
+            align-items: baseline;
+            .tb-cost-container {
+                display: flex;
+                flex-direction: column;
+                font-size: 14px;
             }
         }
     }

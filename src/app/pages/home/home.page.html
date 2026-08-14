@@ -4,35 +4,40 @@
 	</div>
 
 	<ng-template #loaded>
-		<ng-container *ngIf="tripsList && tripsList.length > 0; else noTrips">
-			<div class="tb-card w-shadow tb-trip-card" *ngFor="let trip of tripsList" (click)="openTrip(trip)">
-				<div>
-					<h3 class="tb-text">{{ trip.name }}</h3>
-					<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date:
-						'longDate' }}</p>
-				</div>
+		@if (tripsList && tripsList.length > 0) {
+		<div class="tb-card radius-md tb-clickable-card tb-trip-card" *ngFor="let trip of tripsList"
+			(click)="openTrip(trip)">
+			<div class="trip-picture w-50">
+				<ion-img [src]="trip.picture"></ion-img>
+			</div>
 
-				<div class="budget-overview d-flex align-center justify-between">
-					<span class="view-total side__budget">{{ (trip.total_budget | currency:'$') }}</span>
-					<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
+			<div class="budget-overview w-50">
+				<div>
+					<p class="text-bold">{{ trip.location }}</p>
+					<p class="tb-color-subtitle">{{ trip.name }}</p>
+					
+					@if (trip.start_date) {
+					<p class="tb-color-subtitle text-12">{{ (trip.start_date | date: 'MMMM yyyy')}} </p>
+					}
+				</div>
+				<div class="footer-label">
+					<div class="tb-cost-container">
+						<span class="tb-color-subtitle">Planned</span>
+						<span>{{ (trip.total_budget | currency:'$') }}</span>
+					</div>
+					
+					<div class="tb-cost-container">
+						<span class="tb-color-subtitle">Spent</span>
+						<span class="text-bold tb-color-primary">{{ (trip.total_spent | currency:'$') }}</span>
+					</div>
 				</div>
 			</div>
-			
-			<ion-fab horizontal="end" vertical="bottom" slot="fixed">
-				<ion-fab-button (click)="createTrip()">
-					<ion-icon name="add"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
-		</ng-container>
+		</div>
 
-		<ng-template #noTrips>
-			<app-empty-state 
-				icon="airplane-outline" 
-				title="No trips yet!"
-				message="Start planning your next adventure."
-				buttonLabel="Create a trip"
-				(buttonClick)="createTrip()">
-			</app-empty-state>
-		</ng-template>
+		} @else {
+		<app-empty-state icon="airplane-outline" title="No trips yet!" message="Start planning your next adventure."
+			buttonLabel="Create a trip" (buttonClick)="createTrip()">
+		</app-empty-state>
+		}
 	</ng-template>
 </div>
