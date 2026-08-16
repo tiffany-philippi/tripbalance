@@ -1,12 +1,6 @@
-<div class="tb-container tb-trip-form">
-	<div class="tb-steps">
-		<span class="active"></span>
-		<span></span>
-		<span></span>
-	</div>
-
+<div class="tb-trip-form">
 	<h1>Create Trip</h1> <!-- @TODO: i18n -->
-	<form [formGroup]="form" (ngSubmit)="createTrip()">
+	<form [formGroup]="form">
 		<div class="tb-field-container">
 			<ion-input formControlName="name" type="text" label="Name" class="tb-custom-field"
 				label-placement="floating" fill="outline" placeholder="Type the trip name"></ion-input>
@@ -39,6 +33,12 @@
 			</div>
 		</div>
 
-		<ion-button [disabled]="loadingSubmit" class="w-100 tb-primary-button" type="submit">Next</ion-button>
 	</form>
+</div>
+
+<div class="tb-footer">
+	<ion-button [disabled]="form.invalid" class="w-100 tb-primary-button" (click)="submit()">Next</ion-button>
+	<ion-button fill="clear" class="w-100 tb-text-danger" (click)="cancelAction.emit()">
+		Cancel
+	</ion-button>
 </div>

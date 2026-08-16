@@ -7,7 +7,7 @@ import { TripsService } from 'src/app/core/services/trips';
 import { TripBudgetOverviewComponent } from 'src/app/shared/components/trip-budget-overview/trip-budget-overview.component';
 import { BudgetCategoryCardComponent } from "src/app/shared/components/budget-category-card/budget-category-card.component";
 import { ExpensesListComponent } from 'src/app/shared/components/expenses-list/expenses-list.component';
-import { CategorySummary, ExpenseItem, TripView } from 'src/app/models/trip.model';
+import { CategorySummaryView, ExpenseItem, TripView } from 'src/app/models/trip.model';
 import { ToastService } from 'src/app/core/services/toast';
 import { ViewChild } from '@angular/core';
 import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
@@ -34,7 +34,7 @@ export class TripDetailsPage {
 	headerService = inject(HeaderService);
 	tripId!: string;
 	trip!: TripView;
-	categories: CategorySummary[] = [];
+	categories: CategorySummaryView[] = [];
 	expenses: ExpenseItem[] = [];
 
 	loading: boolean = true;

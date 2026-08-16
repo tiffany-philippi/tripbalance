@@ -21,27 +21,9 @@ const routes: Routes = [
 			import('./pages/trip-details/trip-details.page').then(m => m.TripDetailsPage)
 	},
 	{
-		path: 'trip-setup',
-		children: [
-			{
-				path: 'create',
-				canActivate: [authGuard],
-				loadComponent: () =>
-					import('./pages/trip-setup/create-trip/create-trip.page').then(m => m.CreateTripPage)
-			},
-			{
-				path: ':id/categories',
-				canActivate: [authGuard],
-				loadComponent: () =>
-					import('./pages/trip-setup/select-categories/select-categories.page').then(m => m.SelectCategoriesPage)
-			},
-			{
-				path: ':id/budget',
-				canActivate: [authGuard],
-				loadComponent: () =>
-					import('./pages/trip-setup/create-budget/create-budget.page').then(m => m.CreateBudgetPage)
-			},
-		]
+		path: 'trip-setup/create',
+		canActivate: [authGuard],
+		loadComponent: () => import('./pages/trip-setup/trip-setup.page').then(m => m.TripSetupPage)
 	},
 	{
 		path: 'trip-details/:id/expense',
