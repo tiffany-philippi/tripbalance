@@ -1,71 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { AuthService } from 'src/app/core/services/auth';
-import { HeaderService } from 'src/app/core/services/header';
-import { ToastService } from 'src/app/core/services/toast';
-import { TripsService } from 'src/app/core/services/trips';
 
 @Component({
-  selector: 'app-create-trip',
+  selector: 'app-step-trip-info',
   templateUrl: './create-trip.page.html',
-  styleUrls: ['./create-trip.page.scss', '../trip-setup.scss'],
+  styleUrls: ['./create-trip.page.scss', '../trip-setup.page.scss'],
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class CreateTripPage implements OnInit {
+  @Output() nextAction = new EventEmitter<any>();
+  @Output() cancelAction = new EventEmitter<any>();
+  @Input() data?: any;
+
   form: FormGroup = new FormGroup({});
-  loading: boolean = true;
-  loadingSubmit: boolean = false;
   minEndDate: string = new Date().toISOString();
-
-  constructor(
-    private headerService: HeaderService,
-    private tripsService: TripsService,
-    private authService: AuthService,
-    private toastService: ToastService,
-    private router: Router,
-  ) { }
-
-
-  async ionViewWillEnter() {
-    this.headerService.setHeader('New Trip', true);
-  }
 
   ngOnInit() {
     this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      start_date: new FormControl(new Date().toISOString()),
-      end_date: new FormControl(new Date().toISOString()),
+      name: new FormControl(this.data ? this.data.name : '', Validators.required),
+      start_date: new FormControl(this.data ? this.data.start_date : new Date().toISOString()),
+      end_date: new FormControl(this.data ? this.data.end_date : new Date().toISOString()),
     });
-  }
-
-  async createTrip() {
-    if (this.form.invalid) {
-      this.toastService.warning('Invalid form');
-      return;
-    }
-
-    this.loadingSubmit = true;
-
-    const { data, error } = await this.tripsService.createTrip({
-      ...this.form.value,
-      status: 'draft',
-      created_by: (await this.authService.getSession()).data.session?.user.id
-    });
-
-    this.loadingSubmit = false;
-
-    if (data) {
-      this.form.reset();
-      this.router.navigate([`/trip-setup/${data[0].id}/categories`]);
-    }
-
-    if (error) {
-      await this.toastService.error('A error occurred while creating trip. Try again.');
-      console.error('Error: Create Trip - Submit form', error)
-    }
   }
 
   onStartDateChange(event: any) {
@@ -78,4 +35,11 @@ export class CreateTripPage implements OnInit {
     }
   }
 
+  submit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.nextAction.emit(this.form.value);
+  }
 }
