@@ -5,7 +5,7 @@
         <span [class.active]="currentStep === 3"></span>
     </div>
 
-    <app-step-trip-info *ngIf="currentStep === 1" [data]="tripInfo" (next)="next($event)" (cancel)="cancel()">
+    <app-step-trip-info *ngIf="currentStep === 1" [data]="tripInfo" (nextAction)="next($event)" (cancelAction)="cancel()">
     </app-step-trip-info>
 
     <app-step-categories *ngIf="currentStep === 2" [data]="selectedCategories" (next)="next($event)" (prev)="previous()">

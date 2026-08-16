@@ -38,6 +38,10 @@ export class CreateBudgetPage implements OnChanges {
 	}
 
 	submit() {
+		if (this.form.invalid) {
+			this.form.markAllAsTouched();
+			return;
+		}
 		const rows = this.selectedCategories.map(c => ({
 			category_id: c.id,
 			planned_amount: this.form.value[c.id],

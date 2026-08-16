@@ -10,8 +10,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
 })
 export class CreateTripPage implements OnInit {
-  @Output() next = new EventEmitter<any>();
-  @Output() cancel = new EventEmitter<any>();
+  @Output() nextAction = new EventEmitter<any>();
+  @Output() cancelAction = new EventEmitter<any>();
   @Input() data?: any;
 
   form: FormGroup = new FormGroup({});
@@ -36,6 +36,10 @@ export class CreateTripPage implements OnInit {
   }
 
   submit() {
-    this.next.emit(this.form.value);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+    this.nextAction.emit(this.form.value);
   }
 }
