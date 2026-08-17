@@ -88,13 +88,20 @@ export class TripSetupPage {
     async submit() {
         this.loadingSubmit = true;
 
+        const session = (await this.authService.getSession()).data.session;
+        if (!session?.user?.id) {
+            await this.toastService.error('Session expired. Please log in again.');
+            this.loadingSubmit = false;
+            this.router.navigate(['/login'], { replaceUrl: true });
+            return;
+        }
         const { data: trip, error: tripError } = await this.tripsService.createTrip({
             ...this.tripInfo,
             status: 'active',
-            created_by: (await this.authService.getSession()).data.session?.user.id
+            created_by: session.user.id
         });
 
-        if (tripError || !trip) {
+        if (tripError || !trip?.length) {
             await this.toastService.error('Error creating trip. Try again.');
             this.loadingSubmit = false;
             return;

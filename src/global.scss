@@ -227,9 +227,11 @@ ion-datetime-button::part(native) {
 
 .tb-footer {
     padding: 16px;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     background: var(--ion-background-color);
+    box-sizing: border-box;
 }

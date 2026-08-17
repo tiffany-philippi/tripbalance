@@ -29,7 +29,6 @@ export class CreateBudgetPage implements OnChanges {
 	}
 
 	buildForm() {
-		console.log(this.data)
 		const controls: { [key: string]: FormControl } = {};
 		this.selectedCategories.forEach(c => {
 			controls[c.id] = new FormControl(0, Validators.min(0));
@@ -38,6 +37,10 @@ export class CreateBudgetPage implements OnChanges {
 	}
 
 	submit() {
+		if (this.form.invalid) {
+			this.form.markAllAsTouched();
+			return;
+		}
 		const rows = this.selectedCategories.map(c => ({
 			category_id: c.id,
 			planned_amount: this.form.value[c.id],
