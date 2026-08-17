@@ -7,8 +7,14 @@
 		@if (tripsList && tripsList.length > 0) {
 		<div class="tb-card radius-md tb-clickable-card tb-trip-card" *ngFor="let trip of tripsList"
 			(click)="openTrip(trip)">
-			<div class="trip-picture w-50">
-				<ion-img [src]="trip.picture"></ion-img>
+			<div class="picture-container w-50">
+				@if (trip.picture) {
+					<ion-img class="trip-picture square-lg" [src]="trip.picture"></ion-img>
+				} @else {
+					<div class="no-picture square-lg">
+						<ion-img [src]="'assets/icon/no-picture.svg'"></ion-img>
+					</div>
+				}
 			</div>
 
 			<div class="budget-overview w-50">
