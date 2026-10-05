@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -18,7 +17,6 @@ import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty
 	templateUrl: './trip-details.page.html',
 	styleUrls: ['./trip-details.page.scss'],
 	imports: [
-		CommonModule,
 		IonicModule,
 		TripBudgetOverviewComponent,
 		BudgetCategoryCardComponent,

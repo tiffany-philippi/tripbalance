@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -7,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-step-trip-info',
   templateUrl: './create-trip.page.html',
   styleUrls: ['./create-trip.page.scss', '../trip-setup.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class CreateTripPage implements OnInit {
   @Output() nextAction = new EventEmitter<any>();

@@ -1,14 +1,16 @@
 <div class="tb-budget-list">
   <div [formGroup]="form">
-    <div *ngFor="let category of selectedCategories" [ngClass]="'tb-budget-item tb-budget-item__' + category.color_key">
-      <div class="tb-budget-item__title">
-        <ion-icon [name]="category.icon"></ion-icon>
-        <span>{{ category.name }}</span>
+    @for (category of selectedCategories; track category.id) {
+      <div [ngClass]="'tb-budget-item tb-budget-item__' + category.color_key">
+        <div class="tb-budget-item__title">
+          <ion-icon [name]="category.icon"></ion-icon>
+          <span>{{ category.name }}</span>
+        </div>
+        <ion-input [formControlName]="category.id" type="number" placeholder="0.00" fill="outline"
+          class="tb-custom-field">
+        </ion-input>
       </div>
-      <ion-input [formControlName]="category.id" type="number" placeholder="0.00" fill="outline"
-        class="tb-custom-field">
-      </ion-input>
-    </div>
+    }
   </div>
 </div>
 

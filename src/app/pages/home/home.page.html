@@ -1,11 +1,11 @@
 <div class="tb-container">
-	<div class="tb-loading lg" *ngIf="loading; else loaded">
-		<ion-spinner name="bubbles"></ion-spinner>
-	</div>
-
-	<ng-template #loaded>
-		<ng-container *ngIf="tripsList && tripsList.length > 0; else noTrips">
-			<div class="tb-card w-shadow tb-trip-card" *ngFor="let trip of tripsList" (click)="openTrip(trip)">
+	@if (loading) {
+		<div class="tb-loading lg">
+			<ion-spinner name="bubbles"></ion-spinner>
+		</div>
+	} @else if (tripsList && tripsList.length > 0) {
+		@for (trip of tripsList; track trip.id) {
+			<div class="tb-card w-shadow tb-trip-card" (click)="openTrip(trip)">
 				<div>
 					<h3 class="tb-text">{{ trip.name }}</h3>
 					<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date:
@@ -17,22 +17,20 @@
 					<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
 				</div>
 			</div>
-			
-			<ion-fab horizontal="end" vertical="bottom" slot="fixed">
-				<ion-fab-button (click)="createTrip()">
-					<ion-icon name="add"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
-		</ng-container>
+		}
 
-		<ng-template #noTrips>
-			<app-empty-state 
-				icon="airplane-outline" 
-				title="No trips yet!"
-				message="Start planning your next adventure."
-				buttonLabel="Create a trip"
-				(buttonClick)="createTrip()">
-			</app-empty-state>
-		</ng-template>
-	</ng-template>
+		<ion-fab horizontal="end" vertical="bottom" slot="fixed">
+			<ion-fab-button (click)="createTrip()">
+				<ion-icon name="add"></ion-icon>
+			</ion-fab-button>
+		</ion-fab>
+	} @else {
+		<app-empty-state
+			icon="airplane-outline"
+			title="No trips yet!"
+			message="Start planning your next adventure."
+			buttonLabel="Create a trip"
+			(buttonClick)="createTrip()">
+		</app-empty-state>
+	}
 </div>
