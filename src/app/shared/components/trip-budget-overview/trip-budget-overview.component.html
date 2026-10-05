@@ -2,22 +2,21 @@
   <div>
     <!-- @TODO: i18n -->
     <p class="tb-color-subtitle">Summary</p>
-    <ion-spinner name="bubbles" *ngIf="loading"></ion-spinner>
-
-    <ng-container *ngIf="!loading">
+    @if (loading) {
+      <ion-spinner name="bubbles"></ion-spinner>
+    } @else {
       <p class="tb-text text-40 tb-color-primary text-bold">{{ trip.total_spent | currency:'USD' }} <span class="text-12 font-weight-400">spent</span></p>
-
       <p class="tb-text" [ngClass]="getSavingsClass(trip.total_budget, trip.total_spent)">
-        <ng-container>
-          <ion-icon *ngIf="isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-up-outline"></ion-icon>
-          <ion-icon *ngIf="!isMoreThanZero(trip.total_budget - trip.total_spent)" name="arrow-down-outline"></ion-icon>
-        </ng-container>
-
+        @if (isMoreThanZero(trip.total_budget - trip.total_spent)) {
+          <ion-icon name="arrow-up-outline"></ion-icon>
+        } @else {
+          <ion-icon name="arrow-down-outline"></ion-icon>
+        }
         {{ trip.total_budget - trip.total_spent | currency:'USD' }}
         <span class="text-12">
           {{ isMoreThanZero(trip.total_budget - trip.total_spent) ? 'saved' : 'overspent' }}
         </span>
       </p>
-    </ng-container>
+    }
   </div>
 </div>

@@ -1,19 +1,23 @@
 <ion-app>
   <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-buttons slot="start" *ngIf="headerService.showBackButton()">
-        <ion-button (click)="goBack()">
-          <ion-icon name="arrow-back-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      @if (headerService.showBackButton()) {
+        <ion-buttons slot="start">
+          <ion-button (click)="goBack()">
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      }
 
       <ion-title>{{ headerService.title() }}</ion-title>
 
-      <ion-buttons slot="end" *ngIf="authService.loggedIn()">
-        <ion-button (click)="authService.signOut()" alt-label="Logout">
-          <ion-icon name="log-out-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
+      @if (authService.loggedIn()) {
+        <ion-buttons slot="end">
+          <ion-button (click)="authService.signOut()" alt-label="Logout">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      }
     </ion-toolbar>
   </ion-header>
 
