@@ -1,7 +1,7 @@
 {
   "name": "tripbalance",
   "version": "0.0.1",
-  "author": "Ionic Framework",
+  "author": "Tiffany Philippi",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
@@ -63,5 +63,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.0"
   },
-  "description": "An Ionic project"
+  "description": "Mobile-first travel budget tracker built with Angular, Ionic and Supabase"
 }
