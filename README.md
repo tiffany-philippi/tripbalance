@@ -4,6 +4,18 @@
 
 TripBalance is a mobile-first app for travelers who want to stay on top of their finances without the stress. Organize your trip budget by category, track expenses in real time, and always know how much you have left.
 
+### 🔗 Live demo: [tripbalance-one.vercel.app](https://tripbalance-one.vercel.app/login)
+
+Use the demo account to explore the app:
+
+| Email | Password |
+|---|---|
+| `demo@tripbalance.com` | `d3m@User` |
+
+> The demo account is shared, so data may be reset from time to time. Best viewed on mobile or with your browser's device toolbar.
+
+> 🎨 **Redesign in progress:** I'm currently refreshing the layout and visual identity, moving colors and spacing to design tokens in Figma mapped 1:1 to CSS variables. Screenshots below show the current version.
+
 ---
 
 <img height="650" alt="Login Page" src="https://github.com/user-attachments/assets/7caa5531-66f4-422c-a4e0-fc4b61c4996a" />
@@ -28,7 +40,7 @@ TripBalance is a mobile-first app for travelers who want to stay on top of their
 
 | Layer | Technology |
 |---|---|
-| Framework | Angular 18 + Ionic 8 |
+| Framework | Angular 20 + Ionic 8 |
 | Mobile | Capacitor 8 |
 | Backend / DB | Supabase (PostgreSQL + Auth) |
 | Language | TypeScript |
