@@ -1,6 +1,6 @@
-@if (expenses && expenses.length > 0) {
+@if (expenses()?.length) {
   <ion-list class="expenses-list">
-    @for (expense of expenses; track expense.id) {
+    @for (expense of expenses(); track expense.id) {
       <ion-item class="expenses-list-item row justify-between">
         <span [class]="'expense-category-square' + ' ' + expense.categories.color_key"></span>
         <div class="expense-title-section col">
@@ -19,12 +19,12 @@
   </ion-list>
 }
 
-@if (expenses && expenses.length === 0) {
+@if (expenses()?.length === 0) {
   <div>
     <ion-label>No expenses yet.</ion-label>
   </div>
 }
 
-@if (hasError) {
+@if (hasError()) {
   <ion-label class="text-align-center text-color-error">Something went wrong.</ion-label>
 }

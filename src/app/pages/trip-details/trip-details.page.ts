@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderService } from 'src/app/core/services/header';
@@ -6,9 +6,8 @@ import { TripsService } from 'src/app/core/services/trips';
 import { TripBudgetOverviewComponent } from 'src/app/shared/components/trip-budget-overview/trip-budget-overview.component';
 import { BudgetCategoryCardComponent } from "src/app/shared/components/budget-category-card/budget-category-card.component";
 import { ExpensesListComponent } from 'src/app/shared/components/expenses-list/expenses-list.component';
-import { CategorySummaryView, ExpenseItem, TripView } from 'src/app/models/trip.model';
 import { ToastService } from 'src/app/core/services/toast';
-import { ViewChild } from '@angular/core';
+import { TripStateService } from 'src/app/core/services/trip-state';
 import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty-state.component';
 
 
@@ -25,17 +24,14 @@ import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty
 	],
 })
 export class TripDetailsPage {
-	@ViewChild(ExpensesListComponent) expensesList!: ExpensesListComponent;
-	@ViewChild(BudgetCategoryCardComponent) categoryCard!: BudgetCategoryCardComponent;
-	@ViewChild(TripBudgetOverviewComponent) budgetOverview!: TripBudgetOverviewComponent;
-
 	headerService = inject(HeaderService);
-	tripId!: string;
-	trip!: TripView;
-	categories: CategorySummaryView[] = [];
-	expenses: ExpenseItem[] = [];
+	tripState = inject(TripStateService);
 
-	loading: boolean = true;
+	tripId = signal<string>('');
+	trip = this.tripState.trip;
+	hasBudget = computed(() => (this.trip()?.total_budget ?? 0) > 0);
+
+	loading = signal<boolean>(true);
 
 	public alertButtons = [
 		{
@@ -46,7 +42,7 @@ export class TripDetailsPage {
 			text: 'Delete',
 			role: 'confirm',
 			handler: () => {
-				this.deleteTrip(this.tripId);
+				this.deleteTrip(this.tripId());
 			},
 		},
 	];
@@ -58,26 +54,19 @@ export class TripDetailsPage {
 		private toastService: ToastService
 	) { }
 
+	/* Runs on every enter (including coming back from adding an expense), so the trip state is always refreshed */
 	ionViewWillEnter() {
 		this.route.paramMap.subscribe(async params => {
-			this.tripId = params.get('id') as string;
+			this.tripId.set(params.get('id') as string);
 			await this.loadTrip();
-			this.headerService.setHeader(this.trip?.name ?? 'Details', true);
-			this.loading = false;
+			this.headerService.setHeader(this.trip()?.name ?? 'Details', true);
+			this.loading.set(false);
 		});
 	}
 
-	/* It watches for changes in the expensesList, categoryCard, and budgetOverview and updates previously loaded data */
-	ionViewDidEnter() {
-		this.expensesList?.loadExpenses();
-		this.categoryCard?.loadCategories();
-		this.budgetOverview?.loadData();
-	}
-
 	async loadTrip() {
-		const { data, error } = await this.tripsService.getTrip(this.tripId);
+		const { error } = await this.tripState.load(this.tripId());
 
-		if (data) this.trip = data as TripView;
 		if (error) {
 			await this.toastService.error('There was an error loading trip');
 			console.error('Error loading trip', error);
@@ -85,7 +74,7 @@ export class TripDetailsPage {
 	}
 
 	addExpense() {
-		this.router.navigate([`trip-details/${this.tripId}/expense`])
+		this.router.navigate([`trip-details/${this.tripId()}/expense`])
 	}
 
 	setupBudget(tripId: string) {

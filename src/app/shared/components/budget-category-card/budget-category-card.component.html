@@ -1,10 +1,10 @@
-@if (loading) {
+@if (loading()) {
   <div class="tb-loading sm">
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
-} @else if (categories && categories.length > 0) {
+} @else if (categories()?.length) {
   <div class="d-flex row-wrap">
-    @for (ctg of categories; track ctg.category_id) {
+    @for (ctg of categories(); track ctg.category_id) {
       <div class="tb-card category-card align-center">
         <div class="category-icon" [ngClass]="ctg.color_key">
           <ion-icon [ngClass]="ctg.color_key" [name]="ctg.icon"></ion-icon>

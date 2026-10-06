@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { CategoriesService } from 'src/app/core/services/categories';
+import { TripStateService } from 'src/app/core/services/trip-state';
 import { TripsService } from 'src/app/core/services/trips';
 
 @Component({
@@ -11,31 +10,12 @@ import { TripsService } from 'src/app/core/services/trips';
   styleUrls: ['./budget-category-card.component.scss'],
   imports: [IonicModule, CommonModule],
 })
-export class BudgetCategoryCardComponent implements OnInit {
-  @Input({ required: true }) tripId!: string | null;
+export class BudgetCategoryCardComponent {
+  private tripsService = inject(TripsService);
+  private tripState = inject(TripStateService);
 
-  loading: boolean = true;
-  hasError: boolean = false;
-  categories: any[] = [];
-
-  constructor(
-    private tripsService: TripsService,
-    private categoriesService: CategoriesService,
-    private router: Router,
-  ) { }
-
-  ngOnInit() { 
-    this.loadCategories();
-  }
-
-
-  async loadCategories() {
-    const { data, error } = await this.categoriesService.getCategories(this.tripId!);
-
-    this.loading = false;
-    this.categories = data!;
-    this.hasError = error !== null;
-  }
+  loading = this.tripState.categoriesLoading;
+  categories = this.tripState.categories;
 
   getSavingsClass(planned: number, spent: number): string {
     return this.tripsService.getSavingsClass(planned, spent);
