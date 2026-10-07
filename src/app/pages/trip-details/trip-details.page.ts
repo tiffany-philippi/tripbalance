@@ -55,13 +55,11 @@ export class TripDetailsPage {
 	) { }
 
 	/* Runs on every enter (including coming back from adding an expense), so the trip state is always refreshed */
-	ionViewWillEnter() {
-		this.route.paramMap.subscribe(async params => {
-			this.tripId.set(params.get('id') as string);
-			await this.loadTrip();
-			this.headerService.setHeader(this.trip()?.name ?? 'Details', true);
-			this.loading.set(false);
-		});
+	async ionViewWillEnter() {
+		this.tripId.set(this.route.snapshot.paramMap.get('id') as string);
+		await this.loadTrip();
+		this.headerService.setHeader(this.trip()?.name ?? 'Details', true);
+		this.loading.set(false);
 	}
 
 	async loadTrip() {
