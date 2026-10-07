@@ -58,13 +58,11 @@ export class TripDetailsPage {
 		private toastService: ToastService
 	) { }
 
-	ionViewWillEnter() {
-		this.route.paramMap.subscribe(async params => {
-			this.tripId = params.get('id') as string;
-			await this.loadTrip();
-			this.headerService.setHeader(this.trip?.name ?? 'Details', true);
-			this.loading = false;
-		});
+	async ionViewWillEnter() {
+		this.tripId = this.route.snapshot.paramMap.get('id') as string;
+		await this.loadTrip();
+		this.headerService.setHeader(this.trip?.name ?? 'Details', true);
+		this.loading = false;
 	}
 
 	/* It watches for changes in the expensesList, categoryCard, and budgetOverview and updates previously loaded data */
