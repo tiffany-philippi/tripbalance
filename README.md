@@ -25,6 +25,16 @@ Use the demo account to explore the app:
 
 ---
 
+## What's new in 1.1.0
+
+- **Built-in control flow** — templates migrated to Angular's `@if` / `@for` syntax
+- **Signals-based state** — app state moved to Signals with a shared `TripStateService`
+- **Route subscription leak fix** — route subscriptions are now cleaned up properly
+- **Cypress E2E tests** — coverage for login, session persistence and logout
+- **Commitizen** — guided conventional commit messages via Commitizen
+
+---
+
 ## Features
 
 - **Trip management** — Create and manage multiple trips with destination, dates, and cover image
