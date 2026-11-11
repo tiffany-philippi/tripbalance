@@ -13,7 +13,7 @@
 
       @if (authService.loggedIn()) {
         <ion-buttons slot="end">
-          <ion-button (click)="authService.signOut()" alt-label="Logout">
+          <ion-button data-cy="logout-button" (click)="authService.signOut()" alt-label="Logout">
             <ion-icon name="log-out-outline"></ion-icon>
           </ion-button>
         </ion-buttons>

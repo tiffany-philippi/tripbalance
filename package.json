@@ -10,6 +10,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "e2e": "cypress open",
+    "e2e:run": "cypress run",
     "build:vercel": "echo \"export const environment = { production: true, supabaseUrl: '$SUPABASE_URL', supabaseKey: '$SUPABASE_KEY' };\" > src/environments/environment.prod.ts && ng build --configuration production",
     "commit": "cz"
   },
@@ -52,6 +54,8 @@
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "commitizen": "^4.3.2",
+    "cypress": "^16.1.1",
+    "cypress-real-events": "^1.15.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.29.1",

@@ -45,7 +45,7 @@ Use the demo account to explore the app:
 | Backend / DB | Supabase (PostgreSQL + Auth) |
 | Language | TypeScript |
 | Styling | SCSS |
-| Testing | Karma + Jasmine |
+| Testing | Karma + Jasmine, Cypress (e2e) |
 | Linting | ESLint + Angular ESLint |
 
 ---
@@ -91,6 +91,24 @@ export const environment = {
 
 ```bash
 ionic serve
+```
+
+### Running e2e tests
+
+The e2e tests log in with a real Supabase user. Copy the Cypress env template and fill in the test user's credentials:
+
+```bash
+cp cypress.env.example.json cypress.env.json
+```
+
+With the app running on `http://localhost:4200` (`npm start`):
+
+```bash
+# Interactive mode
+npm run e2e
+
+# Headless mode
+npm run e2e:run
 ```
 
 ---
