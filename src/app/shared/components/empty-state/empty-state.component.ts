@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
@@ -6,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
   selector: 'app-empty-state',
   templateUrl: './empty-state.component.html',
   styleUrls: ['./empty-state.component.scss'],
-  imports: [CommonModule, IonicModule,],
+  imports: [IonicModule],
 })
 export class EmptyStateComponent {
   @Input() icon: string = 'alert-circle-outline';

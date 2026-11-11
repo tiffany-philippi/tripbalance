@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +12,7 @@ import { CategorySummaryView } from 'src/app/models/trip.model';
   selector: 'app-create-expense',
   templateUrl: './create-expense.page.html',
   styleUrls: ['./create-expense.page.scss'],
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [IonicModule, FormsModule, ReactiveFormsModule],
 })
 export class CreateExpensePage implements OnInit {
   form: FormGroup = new FormGroup({});

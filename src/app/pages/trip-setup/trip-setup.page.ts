@@ -1,4 +1,3 @@
-import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActionSheetController, IonicModule } from "@ionic/angular";
@@ -18,7 +17,6 @@ import { Category } from "src/app/models/trip.model";
     templateUrl: './trip-setup.page.html',
     styleUrls: ['./trip-setup.page.scss'],
     imports: [
-        CommonModule,
         IonicModule,
         CreateTripPage,
         SelectCategoriesPage,

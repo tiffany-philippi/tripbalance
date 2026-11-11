@@ -26,8 +26,10 @@
     </div>
     <div class="tb-field-container">
       <ion-select errorText="This field is required" [disabled]="loadingData" formControlName="category_id" label="Category" class="tb-custom-field" label-placement="floating" fill="outline">
-        <ion-select-option *ngFor="let category of categories"
-          [value]="category.category_id">{{category.category_name}}</ion-select-option>
+        @for (category of categories; track category.category_id) {
+          <ion-select-option
+            [value]="category.category_id">{{category.category_name}}</ion-select-option>
+        }
       </ion-select>
     </div>
 

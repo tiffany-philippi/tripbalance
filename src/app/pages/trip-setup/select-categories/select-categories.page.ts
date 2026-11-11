@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CategoriesService } from 'src/app/core/services/categories';
@@ -9,7 +8,7 @@ import { TripCategory, Category } from 'src/app/models/trip.model';
 	selector: 'app-step-categories',
 	templateUrl: './select-categories.page.html',
 	styleUrls: ['./select-categories.page.scss', '../trip-setup.page.scss'],
-	imports: [CommonModule, IonicModule],
+	imports: [IonicModule],
 })
 export class SelectCategoriesPage implements OnInit {
 	@Output() next = new EventEmitter<TripCategory[]>();

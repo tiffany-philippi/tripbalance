@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { TripStateService } from 'src/app/core/services/trip-state';
 import { TripsService } from 'src/app/core/services/trips';
-import { TripView } from 'src/app/models/trip.model';
 
 @Component({
   selector: 'app-trip-budget-overview',
@@ -10,27 +10,11 @@ import { TripView } from 'src/app/models/trip.model';
   styleUrls: ['./trip-budget-overview.component.scss'],
   imports: [IonicModule, CommonModule],
 })
-export class TripBudgetOverviewComponent implements OnInit {
-  @Input({ required: true }) trip!: TripView;
+export class TripBudgetOverviewComponent {
+  private tripsService = inject(TripsService);
+  private tripState = inject(TripStateService);
 
-  loading: boolean = true;
-  hasError: boolean = false;
-
-  constructor(
-    private tripsService: TripsService,
-  ) { }
-
-  async ngOnInit() {
-    await this.loadData();
-  }
-
-  async loadData() {
-    const { data, error } = await this.tripsService.getTrip(this.trip.id!);
-
-    this.loading = false;
-    this.trip = data;
-    this.hasError = error !== null;
-  }
+  trip = this.tripState.trip;
 
   getSavingsClass(planned: number, spent: number): string {
     return this.tripsService.getSavingsClass(planned, spent);

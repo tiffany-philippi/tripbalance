@@ -1,6 +1,6 @@
 {
   "name": "tripbalance",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "author": "Tiffany Philippi",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -10,7 +10,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "build:vercel": "echo \"export const environment = { production: true, supabaseUrl: '$SUPABASE_URL', supabaseKey: '$SUPABASE_KEY' };\" > src/environments/environment.prod.ts && ng build --configuration production"
+    "e2e": "cypress open",
+    "e2e:run": "cypress run",
+    "build:vercel": "echo \"export const environment = { production: true, supabaseUrl: '$SUPABASE_URL', supabaseKey: '$SUPABASE_KEY' };\" > src/environments/environment.prod.ts && ng build --configuration production",
+    "commit": "cz"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +53,10 @@
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
+    "commitizen": "^4.3.2",
+    "cypress": "^16.1.1",
+    "cypress-real-events": "^1.15.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.16.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.1",
@@ -63,5 +70,10 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.0"
   },
-  "description": "Mobile-first travel budget tracker built with Angular, Ionic and Supabase"
+  "description": "Mobile-first travel budget tracker built with Angular, Ionic and Supabase",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
 }

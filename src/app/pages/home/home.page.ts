@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
+import { Component, computed, signal } from '@angular/core'
 import { Router } from '@angular/router'
 import { IonicModule } from '@ionic/angular'
 import { HeaderService } from 'src/app/core/services/header'
@@ -20,8 +20,9 @@ import { EmptyStateComponent } from 'src/app/shared/components/empty-state/empty
 })
 export class HomePage {
 
-  tripsList: TripView[] = []
-  loading: boolean = true
+  tripsList = signal<TripView[]>([])
+  loading = signal<boolean>(true)
+  hasTrips = computed(() => this.tripsList().length > 0)
 
   constructor(
     private tripsService: TripsService,
@@ -37,9 +38,9 @@ export class HomePage {
 
   async loadTrips() {
     const { data, error } = await this.tripsService.getTrips()
-    this.loading = false;
+    this.loading.set(false);
     
-    if (data) this.tripsList = data;
+    if (data) this.tripsList.set(data);
     if (error) {
       await this.toastService.error('There was an error loading trips');
       console.error('Error loading trips', error);
