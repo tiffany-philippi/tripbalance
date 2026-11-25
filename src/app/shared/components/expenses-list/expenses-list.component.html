@@ -2,7 +2,7 @@
   <ion-list class="expenses-list">
     @for (expense of expenses(); track expense.id) {
       <ion-item class="expenses-list-item row justify-between">
-        <span [class]="'expense-category-square' + ' ' + expense.categories.color_key"></span>
+        <span aria-hidden="true" [class]="'expense-category-square' + ' ' + expense.categories.color_key"></span>
         <div class="expense-title-section col">
           <p>{{ expense.title }}</p>
           <p class="tb-color-subtitle text-12 m-0">{{ expense.expense_date | date }}</p>
@@ -26,5 +26,5 @@
 }
 
 @if (hasError()) {
-  <ion-label class="text-align-center text-color-error">Something went wrong.</ion-label>
+  <ion-label role="alert" class="text-align-center text-color-error">Something went wrong.</ion-label>
 }

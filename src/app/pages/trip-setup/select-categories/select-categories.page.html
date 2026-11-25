@@ -1,11 +1,13 @@
-<div class="tb-checkbox-list">
+<div class="tb-checkbox-list" role="group" aria-label="Trip categories">
   @for (category of defaultCategories; track category.id) {
     <div class="tb-category-item" [class.selected]="isSelected(category.id)"
-      (click)="toggleCategory(category.id)">
-      <ion-icon [name]="category.icon"></ion-icon>
+      role="checkbox" tabindex="0" [attr.aria-checked]="isSelected(category.id)" [attr.aria-label]="category.name"
+      (click)="toggleCategory(category.id)" (keydown.enter)="toggleCategory(category.id)"
+      (keydown.space)="$event.preventDefault(); toggleCategory(category.id)">
+      <ion-icon [name]="category.icon" aria-hidden="true"></ion-icon>
       <span>{{ category.name }}</span>
       @if (isSelected(category.id)) {
-        <ion-icon name="checkmark-circle" class="check-icon">
+        <ion-icon name="checkmark-circle" class="check-icon" aria-hidden="true">
         </ion-icon>
       }
     </div>

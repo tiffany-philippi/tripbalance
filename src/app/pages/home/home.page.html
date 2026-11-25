@@ -1,11 +1,13 @@
 <div class="tb-container">
 	@if (loading()) {
 		<div class="tb-loading lg">
-			<ion-spinner name="bubbles"></ion-spinner>
+			<ion-spinner name="bubbles" aria-label="Loading trips"></ion-spinner>
 		</div>
 	} @else if (hasTrips()) {
 		@for (trip of tripsList(); track trip.id) {
-			<div class="tb-card w-shadow tb-trip-card" (click)="openTrip(trip)">
+			<div class="tb-card w-shadow tb-trip-card" role="button" tabindex="0"
+				[attr.aria-label]="'Open trip ' + trip.name"
+				(click)="openTrip(trip)" (keydown.enter)="openTrip(trip)" (keydown.space)="$event.preventDefault(); openTrip(trip)">
 				<div>
 					<h3 class="tb-text">{{ trip.name }}</h3>
 					<p class="tb-color-subtitle">{{ trip.start_date | date: 'longDate'}} - {{ trip.end_date | date:
@@ -13,15 +15,15 @@
 				</div>
 
 				<div class="budget-overview d-flex align-center justify-between">
-					<span class="view-total side__budget">{{ (trip.total_budget | currency:'$') }}</span>
-					<span class="view-total side__spent">{{ trip.total_spent | currency:'$' }}</span>
+					<span class="view-total side__budget" [attr.aria-label]="'Budget ' + (trip.total_budget | currency:'$')">{{ (trip.total_budget | currency:'$') }}</span>
+					<span class="view-total side__spent" [attr.aria-label]="'Spent ' + (trip.total_spent | currency:'$')">{{ trip.total_spent | currency:'$' }}</span>
 				</div>
 			</div>
 		}
 
 		<ion-fab horizontal="end" vertical="bottom" slot="fixed">
-			<ion-fab-button (click)="createTrip()">
-				<ion-icon name="add"></ion-icon>
+			<ion-fab-button aria-label="Create a trip" (click)="createTrip()">
+				<ion-icon name="add" aria-hidden="true"></ion-icon>
 			</ion-fab-button>
 		</ion-fab>
 	} @else {

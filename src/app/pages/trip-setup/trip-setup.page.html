@@ -1,8 +1,10 @@
 <div class="tb-container" [class.no-bg]="currentStep !== 1">
-  <div class="tb-steps">
-    <span [class.active]="currentStep === 1"></span>
-    <span [class.active]="currentStep === 2"></span>
-    <span [class.active]="currentStep === 3"></span>
+  <div class="tb-steps" role="progressbar" aria-label="Trip setup progress"
+    aria-valuemin="1" aria-valuemax="3" [attr.aria-valuenow]="currentStep"
+    [attr.aria-valuetext]="'Step ' + currentStep + ' of 3'">
+    <span aria-hidden="true" [class.active]="currentStep === 1"></span>
+    <span aria-hidden="true" [class.active]="currentStep === 2"></span>
+    <span aria-hidden="true" [class.active]="currentStep === 3"></span>
   </div>
 
   @if (currentStep === 1) {

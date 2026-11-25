@@ -1,6 +1,8 @@
 <div class="tb-empty-state">
-  <ion-icon [name]="icon"></ion-icon>
+  <ion-icon [name]="icon" aria-hidden="true"></ion-icon>
   <h3>{{ title }}</h3>
   <p>{{ message }}</p>
-  <ion-button (click)="buttonClick.emit()">{{ buttonLabel }}</ion-button>
+  @if (buttonLabel) {
+    <ion-button [attr.aria-label]="buttonLabel" (click)="buttonClick.emit()">{{ buttonLabel }}</ion-button>
+  }
 </div>
