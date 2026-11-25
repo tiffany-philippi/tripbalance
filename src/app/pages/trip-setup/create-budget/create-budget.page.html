@@ -3,10 +3,10 @@
     @for (category of selectedCategories; track category.id) {
       <div [ngClass]="'tb-budget-item tb-budget-item__' + category.color_key">
         <div class="tb-budget-item__title">
-          <ion-icon [name]="category.icon"></ion-icon>
+          <ion-icon [name]="category.icon" aria-hidden="true"></ion-icon>
           <span>{{ category.name }}</span>
         </div>
-        <ion-input [formControlName]="category.id" type="number" placeholder="0.00" fill="outline"
+        <ion-input [formControlName]="category.id" type="number" [attr.aria-label]="category.name + ' budget'" placeholder="0.00" fill="outline"
           class="tb-custom-field">
         </ion-input>
       </div>

@@ -9,12 +9,12 @@
 
       <div class="tb-field-container col">
         <ion-input formControlName="amount" type="number" label="Amount" class="tb-custom-field" label-placement="floating" fill="outline">
-          <div slot="start">$</div>
+          <div slot="start" aria-hidden="true">$</div>
         </ion-input>
       </div>
 
       <div class="tb-field-container col">
-        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-datetime-button datetime="datetime" aria-label="Expense date"></ion-datetime-button>
 
         <ion-modal [keepContentsMounted]="true">
           <ng-template>
@@ -35,8 +35,8 @@
 
     <div class="row tb-field-container align-center">
       <div class="col d-flex gap-8">
-        <ion-toggle [checked]="form.value.is_shared" (ionChange)=" changeCounterStatus(form.value.is_shared)" formControlName="is_shared"></ion-toggle>
-        <ion-label>Shared</ion-label>
+        <ion-toggle aria-label="Shared expense" [checked]="form.value.is_shared" (ionChange)=" changeCounterStatus(form.value.is_shared)" formControlName="is_shared"></ion-toggle>
+        <ion-label aria-hidden="true">Shared</ion-label>
       </div>
       <div class="col">
         <ion-input [disabled]="!form.value.is_shared" [counter]="true" maxlength="20" formControlName="split_amount" type="number" label="How many?" class="tb-custom-field" label-placement="floating"
